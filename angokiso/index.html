@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./angokiso.css">
+    <script src="./lib/jsrsasign-all-min.js"></script>
+    <script src="./angokiso.js"></script>
+    <title>暗号基礎</title>
+</head>
+
+<body>
+    <header>
+        <div>暗号基礎</div>
+    </header>
+    <div id="page">
+        <div class="section">
+            <div id="powtitle" class="title" data-toggle="powdetail">手作業 proof of work</div>
+            <div id="powdetail" class="detail">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Name:
+                                <input id="powname" type="text"> Number:
+                                <input id="pownum" type="number" min="0" max="1000000000">
+                                <div id="pownext" class="next"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="powmsg"></div>
+                                <div id="powhash"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="powminmsg"></div>
+                                <div id="powminhash"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="section">
+            <div id="dhtitle" class="title" data-toggle="dhdetail">Diffie-Hellman</div>
+            <div id="dhdetail" class="detail">
+                <table>
+                    <tr>
+                        <td>
+                            ModPow(
+                            <input id="dhpv" class="dhnum" type="number" min="0" max="99" value="10">,
+                            <input id="dhpe" class="dhnum" type="number" min="0" max="99">,
+                            <input id="dhpm" class="dhnum" type="number" min="0" max="99" value="97">)
+                            <div id="dhpeq" class="equal">=</div>
+                            <input id="dhpa" class="dhnum" type="number">（public key)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ModPow(
+                            <input id="dhsv" class="dhnum" type="number" min="0" max="99">,
+                            <input id="dhse" class="dhnum" type="number" min="0" max="99">,
+                            <input id="dhsm" class="dhnum" type="number" min="0" max="99" value="97">)
+                            <div id="dhseq" class="equal">=</div>
+                            <input id="dhsa" class="dhnum" type="number">（shared secret)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
