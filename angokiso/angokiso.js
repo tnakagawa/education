@@ -1,11 +1,12 @@
 
 function init() {
-    document.getElementById("powtitle").addEventListener("click", clicktitle);
-    document.getElementById("dhtitle").addEventListener("click", clicktitle);
-    document.getElementById("pownext").addEventListener("click", pownext);
+    // document.getElementById("powtitle").addEventListener("click", clicktitle);
+    // document.getElementById("dhtitle").addEventListener("click", clicktitle);
+    document.getElementById("pownext").addEventListener("click", play);
     document.getElementById("dhpeq").addEventListener("click", dhpub);
     document.getElementById("dhseq").addEventListener("click", dhshare);
     toggle("powdetail");
+    toggle("dhdetail");
 }
 
 function clicktitle(event) {
@@ -24,6 +25,11 @@ function toggle(id) {
         }
     }
 }
+function play() {
+    for (var i = 0; i < 100; i++) {
+        pownext();
+    }
+}
 
 function pownext() {
     let name = document.getElementById("powname").value;
@@ -35,16 +41,16 @@ function pownext() {
     let md = new KJUR.crypto.MessageDigest({ alg: "sha256", prov: "sjcl" });
     let sha256 = md.digestString(msg);
     console.log(msg, sha256);
-    document.getElementById("powmsg").innerHTML = "「" + msg + "」：";
+    document.getElementById("powmsg").innerHTML = msg;
     document.getElementById("powhash").innerHTML = sha256;
     let min = document.getElementById("powminhash").innerHTML;
     if (min) {
         if (sha256 < min) {
-            document.getElementById("powminmsg").innerHTML = "★「" + msg + "」：";
+            document.getElementById("powminmsg").innerHTML = "★：" + msg;
             document.getElementById("powminhash").innerHTML = sha256;
         }
     } else {
-        document.getElementById("powminmsg").innerHTML = "★「" + msg + "」：";
+        document.getElementById("powminmsg").innerHTML = "★：" + msg;
         document.getElementById("powminhash").innerHTML = sha256;
     }
     document.getElementById("pownum").value = num + 1;
@@ -57,8 +63,8 @@ function dhpub() {
     if (val && exp && mod) {
         let ans = val.modPow(exp, mod);
         document.getElementById("dhpa").value = ans.toString(10);
-        document.getElementById("dhse").value = exp.toString(10);        
-        document.getElementById("dhsm").value = mod.toString(10);        
+        document.getElementById("dhse").value = exp.toString(10);
+        document.getElementById("dhsm").value = mod.toString(10);
     }
 }
 
