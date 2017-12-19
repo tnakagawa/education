@@ -3,6 +3,8 @@ function init() {
     // document.getElementById("powtitle").addEventListener("click", clicktitle);
     // document.getElementById("dhtitle").addEventListener("click", clicktitle);
     document.getElementById("pownext").addEventListener("click", play);
+    document.getElementById("powstart").addEventListener("click", powstart);
+    document.getElementById("powstop").addEventListener("click", powstop);
     document.getElementById("dhpeq").addEventListener("click", dhpub);
     document.getElementById("dhseq").addEventListener("click", dhshare);
     toggle("powdetail");
@@ -26,16 +28,39 @@ function toggle(id) {
     }
 }
 function play() {
-    for (var i = 0; i < 100; i++) {
-        pownext();
-    }
+    calcpow(false);
+}
+
+var powflg = true;
+
+function powstart() {
+    document.getElementById("pownext").style.display = "none";
+    document.getElementById("powstart").style.display = "none";
+    document.getElementById("powstop").style.display = "inline-block";
+    powflg = true;
+    pownext();
+}
+
+function powstop() {
+    document.getElementById("pownext").style.display = "inline-block";
+    document.getElementById("powstart").style.display = "inline-block";
+    document.getElementById("powstop").style.display = "none";
+    powflg = false;
 }
 
 function pownext() {
+    if (powflg) {
+        calcpow(true);
+        setTimeout(pownext, 1);
+    }
+}
+
+function calcpow(inc) {
     let name = document.getElementById("powname").value;
     let num = parseInt(document.getElementById("pownum").value, 10);
     if (isNaN(num)) {
         num = 0;
+        document.getElementById("pownum").value = num;
     }
     let msg = name + " " + num;
     let md = new KJUR.crypto.MessageDigest({ alg: "sha256", prov: "sjcl" });
@@ -53,7 +78,9 @@ function pownext() {
         document.getElementById("powminmsg").innerHTML = "★：" + msg;
         document.getElementById("powminhash").innerHTML = sha256;
     }
-    document.getElementById("pownum").value = num + 1;
+    if (inc) {
+        document.getElementById("pownum").value = num + 1;
+    }
 }
 
 function dhpub() {
