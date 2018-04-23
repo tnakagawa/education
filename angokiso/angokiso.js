@@ -57,7 +57,7 @@ function pownext() {
 
 function calcpow(inc) {
     let name = document.getElementById("powname").value;
-    let num = parseInt(document.getElementById("pownum").value, 10);
+    let num = new BigInteger(document.getElementById("pownum").value, 10);
     if (isNaN(num)) {
         num = 0;
         document.getElementById("pownum").value = num;
