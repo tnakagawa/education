@@ -1,0 +1,779 @@
+
+/** common */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16pt;
+    font-family: monospace;
+    color: #222222;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div {
+    display: inline-block;
+}
+
+input {
+    background-color: transparent;
+    border: 1px solid #FABF8F;
+    padding: 0px;
+    margin: 0px;
+}
+
+button {
+    font-size: 14pt;
+    padding: 5px 10px 5px 10px;
+    margin: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #F7931A;
+    border: none;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+textarea {
+    border: 1px solid #FABF8F;    
+}
+
+.clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.cap {
+    padding: 3px 0px 3px 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-left: 5px solid #F7931A;
+}
+
+.hide {
+    display: none;
+}
+
+div .middle {
+    vertical-align: middle;
+}
+
+div .margintb {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.pane {
+    width: 100%;
+}
+
+.pane td {
+    vertical-align: bottom;
+}
+
+.pane .right {
+    text-align: right;
+}
+
+/** head */
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    border-bottom: 1px solid gray;
+    z-index: 1;
+}
+
+.tabs {
+    position: relative;
+    width: 1000px;
+    height: 50px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.tab {
+    position: absolute;
+    padding-left: 10px;
+    bottom: -1px;
+}
+
+.menu {
+    background-color: white;
+    padding: 5px;
+    margin-left: -8px;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #F7931A;
+}
+
+.select {
+    /*
+    background-color: #F7931A;
+    color: white;
+    */
+    background-color: white;
+    color: #222222;
+    border-bottom: 1px solid white;
+}
+
+/** page */
+
+.pages {
+    display: block;
+    width: 1000px;
+    min-height: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+}
+
+.page {
+    display: none;
+    width: 100%;
+}
+
+/** Transaction */
+
+table.tx {
+    border-top:1px solid #FABF8F;
+    border-left:1px solid #FABF8F;
+    border-right:1px solid #FABF8F;
+    border-bottom:1px solid #FABF8F;
+    border-collapse:collapse;
+    border-spacing:0;
+    empty-cells:show;
+}
+
+.tx * {
+    font-size: 12pt;
+}
+
+.tx th {
+    border-right:1px solid #FABF8F;
+    color:#FFFFFF;
+    background-color:#F7931A;
+    padding:0.3em 1em;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.tx td {
+    border-right:1px solid #FABF8F;
+    border-bottom:1px solid #FABF8F;
+    padding:0.3em 1em;
+    white-space:nowrap;
+    vertical-align: middle;
+}
+
+.tx tr:nth-child(odd) {
+    background: #FDE9D9;
+}
+
+.tx input.num {
+    text-align: right;
+    width: 10em;
+}
+
+.tx textarea {
+    width: 34em;
+    background-color: transparent;
+    border: 1px solid #FABF8F;
+    padding: 0px;
+    margin: 0px;
+}
+
+.tx .des {
+    width: 18em;
+}
+
+.tx .val {
+    width: 20em;
+}
+
+.tx .hex {
+    width: 20em;
+}
+
+.tx .txs {
+    text-align: center;
+}
+
+#txhex {
+    width: 99%;
+    font-size: 12pt;
+}
+
+/** Signature */
+.vwide {
+    padding-top: 0.5em;
+    padding-bottom: 0em;
+    height: 1em;
+}
+
+.outpoint {
+    width: 800px;
+}
+
+/** Script */
+.editor {
+    height: 5em;
+    width: 99%;
+    padding: 0.2em;
+}
+
+#suggest {
+    position: absolute;
+    background-color: white;
+    border: 1px solid gray;
+    font-size: 90%;
+    width: 300px;
+}
+
+#suggest div {
+    display: block;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#suggest div.select{
+    color: white;
+    background-color: #F7931A;
+}
+
+#suggest div.over{
+    background-color: #FABF8F;
+}
+
+/** HDWallets */
+
+.mnemonic {
+    width: 100%;
+}
+
+/** Memo */
+.memo {
+    width: 100%;
+}
+
+.row {
+    text-align: center;
+}
+
+/** Etc */
+
+#etc td {
+    white-space: nowrap;
+    height: 1.2em;
+    vertical-align: middle;
+}
+
+#etc ul {
+    margin-left: 2em;
+}
+
+input.hash {
+    width: 100%;
+}
+
+input.ver {
+    width: 3em;
+}
+
+td.short {
+    width: 2em;
+    white-space: nowrap;
+}
+
+/** ICON */
+
+.add {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 2px solid lightgrey;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display:inline-block;
+    border-radius: 11px;
+    vertical-align: middle;
+}
+
+.add:hover {
+    border: 2px solid grey;
+}
+
+.add::before {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 6px;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 1px;
+    top: 1px;
+    left: 4px;
+}
+.add::after {
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 0px;
+    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 1px;
+    top: 4px;
+    left: 1px;
+}
+
+.del {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.del:hover {
+    border: 2px solid lightgray;
+}
+
+.del::before {
+    position: absolute;
+    content: '';
+    width: 4px;
+    height: 2px;
+    top: 3px;
+    left: 8px;
+    border:1px solid gray;
+    background-color: gray;
+    border-radius: 2px;
+}
+.del::after {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 2px;
+    background-color: gray;
+    top: 5px;
+    left: 3px;
+}
+
+.delb {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 8px;
+    top: 8px;
+    left: 4px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 2px solid gray;
+}
+
+.delb::before {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 9px;
+    background-color: gray;
+    top: 0px;
+    left: 2px;
+}
+
+.delb::after {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 9px;
+    background-color: gray;
+    top: 0px;
+    left: 6px;
+}
+
+.reverse {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.reverse:hover {
+    border: 2px solid lightgray;
+}
+
+.reverse::before {
+    position: absolute;
+    content: '';
+    width: 11px;
+    height: 4px;
+    background-color: gray;
+    bottom: 5px;
+    left: 4px;
+}
+
+.reverse::after {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 0px;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-left: 5px solid gray;
+    border-top: 5px solid transparent;
+    bottom: 2px;
+    left: 15px;
+}
+
+.reverseb::before {
+    position: absolute;
+    content: '';
+    width: 11px;
+    height: 4px;
+    background-color: gray;
+    top: 5px;
+    right: 4px;
+}
+
+.reverseb::after {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 0px;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid gray;
+    border-left: 5px solid transparent;
+    border-top: 5px solid transparent;
+    top: 2px;
+    right: 15px;
+}
+
+.eraser {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.eraser::before {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 2px;
+    background-color: gray;
+    top: 18px;
+    left: 3px;
+}
+
+.eraser:hover {
+    border: 2px solid lightgray;
+}
+
+.eraserb {
+    position: absolute;
+    content: '';
+    width: 12px;
+    height: 8px;
+    top: 4px;
+    left: 8px;
+    background-color: gray;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transform: rotateZ(-135deg);
+}
+
+.eraserb::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 2px;
+    border: 2px solid gray;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: transparent;
+    top: -7px;
+    left: 0px;
+}
+
+.copy {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    border-radius: 3px;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copy:hover {
+    border: 2px solid lightgray;
+}
+
+.copy::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 11px;
+    background-color: transparent;
+    top: 6px;
+    left: 7px;
+    border: 2px solid gray;
+    border-radius: 3px;
+}
+
+.copy::after {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 13px;
+    background-color: transparent;
+    top: 3px;
+    left: 4px;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+    border-radius: 3px;
+}
+
+.ring {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ring::before {
+    position: absolute;
+    content: '';
+    width: 11px;
+    height: 11px;
+    background-color: transparent;
+    border-radius: 9px;
+    border-bottom: 3px solid gray;
+    border-right: 3px solid gray;
+    border-left: 3px solid gray;
+    border-top: 3px solid transparent;
+    top: 4px;
+    left: 3px;
+    transform: rotateZ(45deg);
+}
+
+.ring::after {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 0px;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-left: 5px solid gray;
+    border-top: 5px solid transparent;
+    top: 1px;
+    left: 11px;
+}
+
+.ring:hover {
+    border: 2px solid lightgray;
+}
+
+.small {
+    font-size: 12pt;
+    line-height: 10pt;
+    user-select: none;
+}
+
+.on {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.on:hover {
+    border: 2px solid lightgray;
+}
+
+.on::before {
+    position: absolute;
+    width: 35px;
+    height: 13px;
+    content: 'ON　';
+    font-size: 11pt;
+    line-height: 10pt;
+    padding-left: 2pt;
+    color: white;
+    background-color: #FABF8F;
+    border-radius: 9px;
+    border: 2px solid gray;
+    top: 2px;
+    left: 1px;
+}
+
+.on::after {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    content: '';
+    border-radius: 9px;
+    background-color: gray;
+    top: 5px;
+    left: 27px;
+}
+
+.off {
+    position: relative;
+    width: 44px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.off:hover {
+    border: 2px solid lightgray;
+}
+
+.off::before {
+    position: absolute;
+    width: 35px;
+    height: 13px;
+    content: 'OFF';
+    text-align: right;
+    font-size: 10pt;
+    line-height: 10pt;
+    padding-right: 2pt;
+    color: white;
+    background-color: lightgray;
+    border-radius: 9px;
+    border: 2px solid gray;
+    top: 2px;
+    left: 1px;
+}
+
+.off::after {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    content: '';
+    border-radius: 9px;
+    background-color: gray;
+    top: 5px;
+    left: 5px;
+}
+
+.errors {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    user-select: none;
+    cursor: help;
+    overflow: hidden;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.errors::before {
+    position: absolute;
+    content: '(*)';
+    color: red;
+    font-size: 9pt;
+}
+
+.next {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #F7931A;
+    background-color: #F7931A;
+    border-radius: 10%;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: -3px;
+    margin-left: -6px;
+}
+.next::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: 9px solid white;
+    top: 4px;
+    left: 6px;
+}
+
+.prev {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #F7931A;
+    background-color: #F7931A;
+    border-radius: 10%;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: -3px;
+    margin-left: 5px;
+}
+.prev::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-right: 9px solid white;
+    top: 4px;
+    right: 6px;
+}
