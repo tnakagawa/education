@@ -2,10 +2,13 @@
 
 教育用の教材などを管理していくリポジトリです。
 
-## 一覧
+## 目次
 
 - [暗号基礎](https://tnakagawa.github.io/education/angokiso/index.html)<br>
 PoWデモとDiffie-Hellmanデモ
+
+- [bech32](https://tnakagawa.github.io/education/bech32/index.html)<br>
+bech32デモ
 
 - [txeditor](https://tnakagawa.github.io/education/btctools/txeditor.html)<br>
 transaction editorなど
