@@ -1,0 +1,313 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+}
+
+body {
+    overflow: scroll;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    border-bottom: 1px solid gray;
+    z-index: 1;
+}
+
+#header {
+    position: relative;
+    width: 800px;
+    height: 50px;
+    text-align: left;
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+#tabs {
+    position: absolute;
+    bottom: -1px;
+    display: inline-block;
+}
+
+.tab {
+    background-color: white;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+    font-size: 14pt;
+    background-color: lightgray;
+}
+
+#pages {
+    display: block;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page {
+    width: 100%;
+    display: none;
+    padding: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    z-index: 1;
+}
+
+#footer {
+    height: 30px;
+    font-size: 12pt;
+}
+
+.title {
+    font-size: 18pt;
+    border-left: 5px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+#page1 .title {
+    font-size: 18pt;
+    border-left: 5px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+#page1 table td {
+    font-size: 14pt;
+    vertical-align: middle;
+}
+
+#page1 table td input {
+    font-size: 14pt;
+    width: 37em;
+}
+
+#page1 button {
+    font-size: 14pt;
+    padding: 3px 5px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#page1 ul {
+    margin-left: 1em;
+    font-size: 14pt;
+    line-height: 1.2em;
+}
+
+#page1 div {
+    font-size: 12pt;
+    line-height: 1.2em;
+}
+
+#page1 div .bold {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+#page1 .segwit input {
+    font-size: 14pt;
+    width: 30em;
+}
+
+#page1 #segwitaddrhrp {
+    font-size: 14pt;
+    width: 4em;
+}
+
+#page1 #segwitaddrver {
+    font-size: 14pt;
+    width: 4em;
+}
+
+#page1 td.right {
+    text-align: right;
+    font-size: 10pt;
+}
+
+#page2 table td {
+    font-size: 14pt;
+    vertical-align: middle;
+}
+
+#page2 table td input {
+    font-size: 14pt;
+    width: 37em;
+}
+
+#page2 table {
+    border-spacing: 0px 10px;
+}
+
+#page2 div {
+    font-size: 14pt;
+}
+
+#page2 div.green {
+    font-weight: bold;
+    color: green;
+}
+
+#page2 div.red {
+    font-weight: bold;
+    color: red;
+}
+
+#page2 span.red {
+    font-weight: bold;
+    color: red;
+}
+
+#page2 #checkresult {
+    padding-left: 2px;
+}
+
+#page2 .title {
+    font-size: 18pt;
+    border-left: 5px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+#page3 .title {
+    font-size: 18pt;
+    border-left: 5px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+#page3 table {
+    width: 100%;
+}
+
+#page3 table td {
+    text-align: center;
+    width: 50%;
+    font-size: 14pt;
+}
+
+#page3 input {
+    width: 20em;
+    font-size: 14pt;
+}
+
+
+/** icon */
+
+.copy {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    border-radius: 3px;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copy:hover {
+    border: 2px solid lightgray;
+}
+
+.copy::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 11px;
+    background-color: transparent;
+    top: 6px;
+    left: 7px;
+    border: 2px solid gray;
+    border-radius: 3px;
+}
+
+.copy::after {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 13px;
+    background-color: transparent;
+    top: 3px;
+    left: 4px;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+    border-radius: 3px;
+}
+
+.eraser {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.eraser::before {
+    position: absolute;
+    content: '';
+    width: 16px;
+    height: 2px;
+    background-color: gray;
+    top: 18px;
+    left: 3px;
+}
+
+.eraser:hover {
+    border: 2px solid lightgray;
+}
+
+.eraserb {
+    position: absolute;
+    content: '';
+    width: 12px;
+    height: 8px;
+    top: 4px;
+    left: 8px;
+    background-color: gray;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transform: rotateZ(-135deg);
+}
+
+.eraserb::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 2px;
+    border: 2px solid gray;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: transparent;
+    top: -7px;
+    left: 0px;
+}

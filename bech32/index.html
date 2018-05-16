@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <title>Bech32 Demo</title>
+    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+    <link rel="stylesheet" href="./bech32demo.css">
+    <script src="./lib/jquery-3.2.1.min.js"></script>
+    <script src="./lib/jsrsasign-all-min.js"></script>
+    <script src="../../bech32/ref/javascript/bech32.js"></script>
+    <script src="../../bech32/ref/javascript/segwit_addr.js"></script>
+    <script src="../../bech32/ecc/javascript/bech32_ecc.js"></script>
+    <script src="../../bech32/ecc/javascript/segwit_addr_ecc.js"></script>
+    <script src="./lib/qr.js"></script>
+    <script src="./bech32demo.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="header">
+            <div id="tabs">
+                <div class="tab" data-name="page1">Segwit Address</div>
+                <div class="tab" data-name="page2">Segwit Address Check</div>
+                <div class="tab" data-name="page3">QR Code</div>
+            </div>
+        </div>
+    </header>
+    <div id="pages">
+        <div id="page1" class="page">
+            <div class="title">Segwit Address</div>
+            <br>
+            <div>
+                <div class="bold">Examples</div>
+                <div>All examples use public key 0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798. </div>
+                <div> P2WSH examples use key OP_CHECKSIG as script.</div>
+                <ul>
+                    <li>Mainnet P2WPKH: bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4</li>
+                    <li>Testnet P2WPKH: tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx</li>
+                    <li>Mainnet P2WSH: bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3</li>
+                    <li>Testnet P2WSH: tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7</li>
+                </ul>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div>
+                <div>P2WPKH: version : 0 , witness program : &lt;20-byte-key-hash pubkey HASH160&gt;</div>
+                <div>P2WSH : version : 0 , witness program : &lt;32-byte-hash witnessScript SHA256&gt;</div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">HASH160:<button id="hash160btn">HASH</button>
+                            <div class="eraser" data-type="eraser" data-name="hash160">
+                                <div class="eraserb"></div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HEX:</td>
+                        <td><input id="hash160hex" type="text" data-eraser="hash160"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HASH:</td>
+                        <td><input id="hash160hash" type="text" data-eraser="hash160"></td>
+                        <td>
+                            <div class="copy" data-type="copy" data-id="hash160hash"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">WitnessScript:(&lt;pubkey&gt; OP_CHECKSIG[0xac])<button id="witnessscriptbtn">Create</button>
+                            <div class="eraser" data-type="eraser" data-name="witnessscript">
+                                <div class="eraserb"></div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>pubkey:</td>
+                        <td><input id="witnessscriptpubkey" type="text" data-eraser="witnessscript"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HEX:</td>
+                        <td><input id="witnessscripthex" type="text" data-eraser="witnessscript"></td>
+                        <td>
+                            <div class="copy" data-type="copy" data-id="witnessscripthex"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">SHA256:<button id="sha256btn">HASH</button>
+                            <div class="eraser" data-type="eraser" data-name="sha256">
+                                <div class="eraserb"></div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HEX:</td>
+                        <td><input id="sha256hex" type="text" data-eraser="sha256"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HASH:</td>
+                        <td><input id="sha256hash" type="text" data-eraser="sha256"></td>
+                        <td>
+                            <div class="copy" data-type="copy" data-id="sha256hash"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <br>
+            <table class="segwit">
+                <tbody>
+                    <tr>
+                        <td colspan="2">Segwit Addr:<button id="segwitaddrbtn">Encode</button>
+                            <div class="eraser" data-type="eraser" data-name="segwitaddr">
+                                <div class="eraserb"></div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right">human-readable part:</td>
+                        <td>
+                            <input id="segwitaddrhrp" list="hrp" type="text" data-eraser="segwitaddr">
+                            <datalist id="hrp">
+                                <option value="bc">mainnet("bc")</option>
+                                <option value="tb">testnet("tb")</option>
+                            </datalist>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right">data-part[version]:</td>
+                        <td><input id="segwitaddrver" type="number" min="0" max="16" value="0" data-eraser="segwitaddr"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right">data-part[witness program]:</td>
+                        <td><input id="segwitaddrwp" type="text" data-eraser="segwitaddr"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="right">segwit address:</td>
+                        <td><input id="segwitaddr" type="text" data-eraser="segwitaddr"></td>
+                        <td>
+                            <div class="copy" data-type="copy" data-id="segwitaddr"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <br>
+        </div>
+        <div id="page2" class="page">
+            <div class="title">Segwit Address Check</div>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Message:</td>
+                        <td>
+                            <div id="checkmessage"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>SegwitAddr:</td>
+                        <td><input id="checktarget" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>SegwitAddr:</td>
+                        <td>
+                            <div id="checkresult"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <br>
+        </div>
+        <div id="page3" class="page">
+            <div class="title">QR Code</div>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span id="qrdatasize">0</span>&nbsp;charactors
+                        </td>
+                        <td>
+                            <input id="qrdata" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br>alphanumeric mode</td>
+                        <td><br>byte mode</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <canvas id="amode"></canvas>
+                        </td>
+                        <td>
+                            <canvas id="bmode"></canvas>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <div id="footer">
+            <div id="copyright"></div>
+        </div>
+    </footer>
+</body>
+
+</html>
