@@ -55,13 +55,9 @@ function pownext() {
     }
 }
 
-function calcpow(inc) {
+function calcpow(rnd) {
     let name = document.getElementById("powname").value;
     let num = new BigInteger(document.getElementById("pownum").value, 10);
-    if (isNaN(num)) {
-        num = 0;
-        document.getElementById("pownum").value = num;
-    }
     let msg = name + " " + num;
     let md = new KJUR.crypto.MessageDigest({ alg: "sha256", prov: "sjcl" });
     let sha256 = md.digestString(msg);
@@ -78,8 +74,17 @@ function calcpow(inc) {
         document.getElementById("powminmsg").innerHTML = "★：" + msg;
         document.getElementById("powminhash").innerHTML = sha256;
     }
-    if (inc) {
-        document.getElementById("pownum").value = num + 1;
+    if (rnd) {
+        let seed = new Array(32);
+        new SecureRandom().nextBytes(seed);
+        let hex = "";
+        for (let i = 0; i < seed.length; i++) {
+            if (seed[i] < 0x10) {
+                hex += "0";
+            }
+            hex += seed[i].toString(16);
+        }
+        document.getElementById("pownum").value = new BigInteger(hex, 16);
     }
 }
 

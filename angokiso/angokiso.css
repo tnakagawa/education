@@ -60,7 +60,12 @@ div .detail {
     margin-bottom: -5px;
 }
 
+#powname {
+    width: 5em;
+}
+
 #pownum {
+    width: 20em;
     text-align: right;
 }
 
