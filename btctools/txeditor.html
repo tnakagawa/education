@@ -502,9 +502,11 @@
                     <td colspan="3">
                         <div class="cap clickable" data-bind="click: Util.toggle.bind('scriptaddress');">Script to Address</div>
                         <button data-toggle="scriptaddress" data-bind="click: generate">Generate</button>
-                        <label data-toggle="scriptaddress" class="clickable">Testnet:
-                            <input type="checkbox" data-bind=" checked: test">
-                        </label>
+                        <select data-bind="value: test" data-toggle="scriptaddress">
+                            <option value="0">mainnet</option>
+                            <option value="1">testnet</option>
+                            <option value="2">regtest</option>
+                        </select>
                     </td>
                 </tr>
                 <tr data-toggle="scriptaddress">
@@ -556,9 +558,11 @@
                         <div class="eraser" title="clear" data-bind="click: clear.bind('seed,path')" data-toggle="hdwallets">
                             <div class="eraserb"></div>
                         </div>
-                        <label data-toggle="hdwallets" class="clickable">Testnet:
-                            <input type="checkbox" data-bind=" checked: test">
-                        </label>
+                        <select data-bind="value: test" data-toggle="hdwallets">
+                            <option value="0">mainnet</option>
+                            <option value="1">testnet</option>
+                            <option value="2">regtest</option>
+                        </select>
                     </td>
                 </tr>
                 <tr data-toggle="hdwallets">
@@ -704,9 +708,11 @@
                     </td>
                     <td class="middle short">
                         <div class="margintb">
-                            <label data-toggle="ecdsa" class="clickable">Testnet:
-                                <input type="checkbox" data-bind=" checked: ectest">
-                            </label>
+                            <select data-bind="value: ectest" data-toggle="ecdsa">
+                                <option value="0">mainnet</option>
+                                <option value="1">testnet</option>
+                                <option value="2">regtest</option>
+                            </select>
                         </div>
                     </td>
                 </tr>
@@ -1123,10 +1129,11 @@
                 <tr data-toggle="bech32">
                     <td class="short">hrp:</td>
                     <td>
-                        <input type="text" list="bech32hrp" data-bind="value: bech32hrp" class="ver">
+                        <input type="text" list="bech32hrp" data-bind="value: bech32hrp" class="hrp">
                         <datalist id="bech32hrp">
                             <option value="bc">Main Net</option>
                             <option value="tb">Test Net</option>
+                            <option value="bcrt">Regtest Net</option>
                         </datalist>
                     </td>
                 </tr>

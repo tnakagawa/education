@@ -42,6 +42,12 @@ textarea {
     border: 1px solid #FABF8F;    
 }
 
+select {
+    background-color: transparent;
+    padding: 2px;
+    border: 1px solid #FABF8F;
+}
+
 .clickable {
     cursor: pointer;
     user-select: none;
@@ -293,6 +299,10 @@ input.hash {
 
 input.ver {
     width: 3em;
+}
+
+input.hrp {
+    width: 4em;
 }
 
 td.short {
