@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>M-of-N threshold signature using Schnorr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" type="text/css" media="screen" href="./threshold.css" />
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <script src="./lib/knockout-3.4.2.js"></script>
+    <script src="./lib/jsrsasign-all-min.js"></script>
+    <script src="./threshold.js"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header id="header">
+        <div class="tabs">
+            <div class="tab" data-bind="foreach: tabs">
+                <div data-bind="text: title, click: $parent.show.bind($parent, $data);, css: css"></div>
+            </div>
+        </div>
+    </header>
+    <div class="book">
+        <div id="Shamir" class="sheet">
+            <div data-bind="text: m"></div> of
+            <div data-bind="text: n"></div> Shamir's Secret Sharing<br>
+            <div>p&nbsp;=</div>
+            <input class="shp" list="Shamir's prime number" type="text" data-bind="value: p">
+            <datalist id="Shamir's prime number">
+                <option value="97">97</option>
+                <option value="997">997</option>
+                <option value="9973">9973</option>
+            </datalist>
+            <div>(Prime number)</div><br>
+            <hr>
+            <div>Dealer</div><br>
+            <div>Secret value : s =&nbsp;</div><input class="shs" type="text" data-bind="value: ns"> (s = a<sub>0</sub>)
+            <img class="icon" src="./dice.png" data-bind="click: setSecret"><br>
+            <div>Random values&nbsp;</div><img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
+            <!-- ko foreach: rs -->
+            a<sub data-bind="text: $index()+1"></sub> = <input class="shs" type="text" data-bind="value: r"><br>
+            <!-- /ko -->
+            <hr>
+            <div data-bind="visible: viewPlayer()">
+                <div>Players</div><br>
+                <div>
+                    P<sub>i</sub> = a<sub>0</sub>
+                    <!-- ko foreach: rs -->
+                    + a<sub data-bind="text: $index()+1"></sub>x<sup data-bind="text: supnum($index()+1)"></sup>
+                    <!-- /ko -->
+                </div><br>
+                <!-- ko foreach: ps -->
+                <label>
+                    <div>
+                        <input type="checkbox" data-bind="click: selectPlayer, checked: c, enable: e">
+                    </div>
+                    <div>
+                        P<sub data-bind="text: idx"></sub> = <div data-bind="text: $parent.ns"></div>
+                    </div>
+                    <!-- ko foreach: $parent.rs -->
+                    <div>+</div>
+                    <div data-bind="text: r"></div>
+                    <div class="times">&times;</div>
+                    <div data-bind="text: $parent.idx"></div><sup data-bind="text: supnum($index()+1)"></sup>
+                    <!-- /ko -->
+                    <div>mod </div>
+                    <div data-bind="text: $parent.p()"></div>
+                    <div>= </div>
+                    <div data-bind="text: y()"></div>
+                    <div>&rarr; (</div>
+                    <div data-bind="text: idx"></div>
+                    <div>,</div>
+                    <div data-bind="text: y()"></div>
+                    <div>)</div>
+                </label><br>
+                <!-- /ko -->
+            </div><br>
+            <hr data-bind="visible: viewSecret()">
+            <div data-bind="visible: viewSecret()">
+                <table>
+                    <tr data-bind="foreach: nu()">
+                        <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
+                    </tr>
+                    <tr data-bind="foreach: de()">
+                        <td data-bind="html: $data"></td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr data-bind="foreach: nup()">
+                        <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
+                    </tr>
+                    <tr data-bind="foreach: dep()">
+                        <td data-bind="html: $data"></td>
+                    </tr>
+                </table>
+            </div>
+            <hr data-bind="visible: viewSecret()">
+        </div>
+        <div id="VSS" class="sheet">
+            VSS
+        </div>
+        <div id="Schnorr" class="sheet">
+            Schnorr
+        </div>
+    </div>
+</body>
+
+</html>
