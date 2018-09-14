@@ -12,6 +12,10 @@
 #FF9400
 */
 
+body {
+    min-height: 5000px;
+}
+
 div {
     display: inline-block;
 }
@@ -27,6 +31,7 @@ tr {
 
 td {
     white-space: nowrap;
+    text-align: center;
 }
 
 .clickable {
@@ -44,6 +49,18 @@ td {
 .times {
     margin-left: -10px;
     margin-right: -10px;
+}
+
+.gray {
+    color: gray;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
 }
 
 /** head */
@@ -95,6 +112,19 @@ header {
     border-bottom: 1px solid white;
 }
 
+.point {
+    width: 33em;
+}
+
+.points {
+    width: 40em;
+    height: 10em;
+}
+
+td.calc {
+    vertical-align: bottom;
+}
+
 /** page */
 
 .book {
@@ -115,11 +145,11 @@ header {
 /** Shamir */
 
 sub {
-    font-size: 80%;
+    font-size: 70%;
 }
 
 sup {
-    font-size: 80%;
+    font-size: 70%;
 }
 
 input.shp {
@@ -132,10 +162,37 @@ input.shs {
     text-align: center;
 }
 
+td.shp {
+    text-align: left;
+    padding-right: 3em;
+}
+
 .bunsu {
     border-bottom: 2px black solid;
 }
 
-td {
+.bq {
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+input.vssa {
+    width: 4em;
     text-align: center;
+}
+
+tr.topm {
+    height: 2em;
+    vertical-align: bottom;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+    font-size: 12pt;
 }

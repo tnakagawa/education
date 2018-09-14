@@ -44,38 +44,40 @@
             <!-- /ko -->
             <hr>
             <div data-bind="visible: viewPlayer()">
-                <div>Players</div><br>
-                <div>
-                    P<sub>i</sub> = a<sub>0</sub>
-                    <!-- ko foreach: rs -->
-                    + a<sub data-bind="text: $index()+1"></sub>x<sup data-bind="text: supnum($index()+1)"></sup>
-                    <!-- /ko -->
-                </div><br>
-                <!-- ko foreach: ps -->
-                <label>
-                    <div>
-                        <input type="checkbox" data-bind="click: selectPlayer, checked: c, enable: e">
-                    </div>
-                    <div>
-                        P<sub data-bind="text: idx"></sub> = <div data-bind="text: $parent.ns"></div>
-                    </div>
-                    <!-- ko foreach: $parent.rs -->
-                    <div>+</div>
-                    <div data-bind="text: r"></div>
-                    <div class="times">&times;</div>
-                    <div data-bind="text: $parent.idx"></div><sup data-bind="text: supnum($index()+1)"></sup>
-                    <!-- /ko -->
-                    <div>mod </div>
-                    <div data-bind="text: $parent.p()"></div>
-                    <div>= </div>
-                    <div data-bind="text: y()"></div>
-                    <div>&rarr; (</div>
-                    <div data-bind="text: idx"></div>
-                    <div>,</div>
-                    <div data-bind="text: y()"></div>
-                    <div>)</div>
-                </label><br>
+                Dealer computes P<sub>i</sub> = <div data-bind="text: ns"></div>
+                <!-- ko foreach: rs -->
+                +
+                <div data-bind="text: r"></div>&times;i<sup data-bind="text: supnum($index()+1)"></sup>
                 <!-- /ko -->
+                mod
+                <div data-bind="text: p"></div><br>
+                <table>
+                    <tbody data-bind="foreach: fs">
+                        <tr data-bind="html: $data"></tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr data-bind="visible: viewPlayer()">
+            <div data-bind="visible: viewPlayer()">
+                <div>Players</div><br>
+                <table>
+                    <tbody data-bind="foreach: ps">
+                        <tr>
+                            <td class="shp">
+                                <label>
+                                    <div>
+                                        <input type="checkbox" data-bind="click: selectPlayer, checked: c, enable: e">
+                                    </div>
+                                    <div>
+                                        P<sub data-bind="text: idx"></sub>
+                                        <div data-bind="text: ' : (' + idx + ',' + y() + ')'"></div>
+                                    </div>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
             </div><br>
             <hr data-bind="visible: viewSecret()">
             <div data-bind="visible: viewSecret()">
@@ -89,23 +91,412 @@
                 </table>
                 <br>
                 <table>
-                    <tr data-bind="foreach: nup()">
-                        <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
-                    </tr>
-                    <tr data-bind="foreach: dep()">
-                        <td data-bind="html: $data"></td>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr data-bind="foreach: nup()">
+                                    <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
+                                </tr>
+                                <tr data-bind="foreach: dep()">
+                                    <td data-bind="html: $data"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <div data-bind="visible: !ans(), click: toggleAns" class="bq clickable">?</div>
+                            <div data-bind="visible: ans(),text: sec"></div>
+                        </td>
                     </tr>
                 </table>
             </div>
             <hr data-bind="visible: viewSecret()">
         </div>
         <div id="VSS" class="sheet">
-            VSS
+            <div data-bind="text: m"></div> of
+            <div data-bind="text: n"></div> Verifiable Secret Sharing<br>
+            <div>G&nbsp;:</div>
+            <div data-bind="text: G.bytes()"></div><br>
+            <div>H&nbsp;:</div>
+            <div data-bind="text: H.bytes()"></div>
+            <div data-bind="text: '(=' + x() + 'G)'"></div>
+            <br>
+            <hr>
+            <div>Each Player</div>&nbsp;<img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
+            <table>
+                <tbody data-bind="foreach: {data: ps, as: 'p' }">
+                    <tr>
+                        <td>P<sub data-bind="text: p.idx()"></sub></td>
+                        <!-- ko foreach: {data: as, as: 'a' } -->
+                        <td class="right">&nbsp;a<sub data-bind="text: p.idx()+''+$index()"></sub>:</td>
+                        <td><input class="vssa" type="text" data-bind="value: r"></td>
+                        <!-- /ko -->
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <!-- ko foreach: {data: ads, as: 'ad' } -->
+                        <td class="right">&nbsp;a'<sub data-bind="text: p.idx()+''+$index()"></sub>:</td>
+                        <td><input class="vssa" type="text" data-bind="value: r"></td>
+                        <!-- /ko -->
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div data-bind="visible: fixRandom()">Each Player<br></div>
+            <table data-bind="visible: fix">
+                <tbody data-bind="foreach: {data: ps, as: 'p1' }">
+                    <tr class="topm">
+                        <td class="left topm">P<sub data-bind="text: p1.idx()"></sub>&nbsp;</td>
+                        <td class="left">
+                            <div data-bind="html: p1.formula(0)"></div>&nbsp;
+                        </td>
+                        <td class="left">
+                            <div data-bind="html: p1.formula(1)"></div>&nbsp;
+                        </td>
+                        <td></td>
+                    </tr>
+                    <!-- ko foreach: {data: $parent.ps, as: 'p2' } -->
+                    <!-- ko if: p1.idx() != p2.idx() -->
+                    <tr>
+                        <td></td>
+                        <td class="left">
+                            s<sub data-bind="text: p1.idx() + '' + p2.idx()"></sub>
+                            = f<sub data-bind="text: p1.idx()"></sub>(<div data-bind="text: p2.idx()"></div>) =
+                            <div data-bind="text: p1.f(p2.idx())"></div>
+                        </td>
+                        <td class="left">
+                            s'<sub data-bind="text: p1.idx() + '' + p2.idx()"></sub>
+                            = f'<sub data-bind="text: p1.idx()"></sub>(<div data-bind="text: p2.idx()"></div>) =
+                            <div data-bind="text: p1.fd(p2.idx())"></div>
+                        </td>
+                        <td class="left">
+                            <div data-bind="text: '('+p1.f(p2.idx())+','+p1.fd(p2.idx())+')'"></div>
+                            &rArr; P<sub data-bind="text: p2.idx()"></sub>
+                        </td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </tbody>
+            </table>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>Each player broadcasts commitments</div><br>
+                <table>
+                    <tbody data-bind="foreach: {data: ps, as: 'p' }">
+                        <!-- ko foreach: cs -->
+                        <tr>
+                            <!-- ko if: $index() == 0 -->
+                            <td>P<sub data-bind="text: p.idx()"></sub></td>
+                            <!-- /ko -->
+                            <!-- ko if: $index() != 0 -->
+                            <td></td>
+                            <!-- /ko -->
+                            <td>
+                                &nbsp;&nbsp;C<sub data-bind="text: p.idx()+''+$index()"></sub> =&nbsp;
+                            </td>
+                            <td>
+                                <div data-bind="text: p.as()[$index()].r"></div>G +
+                                <div data-bind="text: p.ads()[$index()].r"></div>H&nbsp;
+                            </td>
+                            <td>
+                                <div data-bind="text: '= ' + $data.bytes()"></div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>Each player verifies commitments</div><br>
+                <table>
+                    <tbody data-bind="foreach: {data: ps, as: 'p1' }">
+                        <!-- ko foreach: {data: $parent.ps, as: 'p2' } -->
+                        <!-- ko if: p1.idx() != p2.idx() -->
+                        <tr>
+                            <td>
+                                <div data-bind="if : (p1.idx() == '1' && p2.idx() == '2')||(p1.idx() != '1' && p2.idx() == '1')">
+                                    P<sub data-bind="text: p1.idx()"></sub>
+                                </div>&nbsp;&nbsp;
+                            </td>
+                            <td class="left">
+                                <div data-bind="text: p1.ss()[$index()]"></div>G +
+                                <div data-bind="text: p1.sds()[$index()]"></div>H
+                            </td>
+                            <td>
+                                <div data-bind="foreach: p2.cs">
+                                    <div data-bind="html: ($index() == 0 ? '&nbsp;=? ' : ' + ')"></div>
+                                    <div data-bind="text: p1.idx()"></div><sup data-bind="text: $index()"></sup>&times;C<sub
+                                        data-bind="text: p2.idx()+''+$index()"></sub>
+                                </div>
+                            </td>
+                            <td>
+                                <div>&nbsp;&rArr;</div>
+                                <div data-bind="text: p1.vcs()[$index()]"></div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>Each player broadcasts</div><br>
+                <table>
+                    <tbody data-bind="foreach: {data: ps, as: 'p' }">
+                        <!-- ko foreach: ps -->
+                        <tr>
+                            <!-- ko if: $index() == 0 -->
+                            <td>P<sub data-bind="text: p.idx()"></sub></td>
+                            <!-- /ko -->
+                            <!-- ko if: $index() != 0 -->
+                            <td></td>
+                            <!-- /ko -->
+                            <td>
+                                &nbsp;&nbsp;A<sub data-bind="text: p.idx()+''+$index()"></sub> =&nbsp;
+                            </td>
+                            <td>
+                                <div data-bind="text: p.as()[$index()].r"></div>G&nbsp;
+                            </td>
+                            <td>
+                                <div data-bind="text: '= ' + $data.bytes()"></div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>Each player verifies</div><br>
+                <table>
+                    <tbody data-bind="foreach: {data: ps, as: 'p1' }">
+                        <!-- ko foreach: {data: $parent.ps, as: 'p2' } -->
+                        <!-- ko if: p1.idx() != p2.idx() -->
+                        <tr>
+                            <td>
+                                <div data-bind="if : (p1.idx() == '1' && p2.idx() == '2')||(p1.idx() != '1' && p2.idx() == '1')">
+                                    P<sub data-bind="text: p1.idx()"></sub>
+                                </div>&nbsp;&nbsp;
+                            </td>
+                            <td class="left">
+                                <div data-bind="text: p1.ss()[$index()]"></div>G
+                            </td>
+                            <td>
+                                <div data-bind="foreach: p2.cs">
+                                    <div data-bind="html: ($index() == 0 ? '&nbsp;=? ' : ' + ')"></div>
+                                    <div data-bind="text: p1.idx()"></div><sup data-bind="text: $index()"></sup>&times;A<sub
+                                        data-bind="text: p2.idx()+''+$index()"></sub>
+                                </div>
+                            </td>
+                            <td>
+                                <div>&nbsp;&rArr;</div>
+                                <div data-bind="text: p1.vps()[$index()]"></div>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>A random secret and its public key</div><br>
+                <div>
+                    <div data-bind="foreach: ps">
+                        <div data-bind="text: ($index() == 0 ? 'P = ' : ' + ')"></div>
+                        A<sub data-bind="text: idx()+'0'"></sub>
+                    </div>
+                    = <div data-bind="text: p"></div>
+                </div>
+            </div>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: fix">
+                <div>Players</div><br>
+                <table>
+                    <tbody data-bind="foreach: ps">
+                        <tr>
+                            <td class="shp">
+                                <label>
+                                    <div>
+                                        <input type="checkbox" data-bind="click: selectPlayer, checked: c, enable: e">
+                                    </div>
+                                    <div>
+                                        P<sub data-bind="text: idx"></sub>
+                                        <div data-bind="text: ' : (' + idx()"></div>
+                                        <div data-bind="foreach: ss">
+                                            <div>, s<sub data-bind="text: '' + ($index()+1) + $parent.idx()"></sub></div>
+                                            <div data-bind="text: ': '+$data"> </div>
+                                        </div>
+                                        <div>)</div>
+                                    </div>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><br>
+            <hr data-bind="visible: fix">
+            <div data-bind="visible: pfix">
+                <div data-bind="foreach: ps">
+                    <!-- ko if: c -->
+                    <table>
+                        <tr data-bind="foreach: $root.nup(idx())">
+                            <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
+                        </tr>
+                        <tr data-bind="foreach: $root.dep(idx())">
+                            <td data-bind="html: $data"></td>
+                        </tr>
+                    </table><br>
+                    <!-- /ko -->
+                </div><br>
+                <div data-bind="html: shtml()"></div>
+                <div data-bind="visible: !ans(), click: toggleAns" class="bq clickable">?</div>
+                <div data-bind="visible: ans(),text: secret()"></div><br>
+            </div>
+            <hr data-bind="visible: pfix">
         </div>
         <div id="Schnorr" class="sheet">
-            Schnorr
+            <div data-bind="text: m"></div> of <div data-bind="text: n"></div> Schnorr's Signature<br>
+            <div>G&nbsp;:</div>
+            <div data-bind="text: G.bytes()"></div><br>
+            <div>H&nbsp;:</div>
+            <div data-bind="text: H.bytes()"></div>
+            <div data-bind="text: '(=' + x() + 'G)'"></div><br>
+            <hr>
+            <div data-bind="foreach: ps">
+                <div data-bind="foreach: As">
+                    <div>A<sub data-bind="text: $parent.idx() + '' + $index()"></sub> =</div>
+                    <div data-bind="text: $data.bytes()"></div><br>
+                </div>
+            </div>
+            <hr>
+            <div>P =</div>
+            <div data-bind="foreach: ps">
+                <div data-bind="if: $index() != 0">+</div>
+                <div>A<sub data-bind="text: idx() + '0'"></sub></div>
+            </div>
+            <div data-bind="text: '= ' + P().bytes()"></div>
+            <hr>
+            <table>
+                <tbody data-bind="foreach: ps">
+                    <tr>
+                        <td class="shp">
+                            <label>
+                                <div>
+                                    <input type="checkbox" data-bind="click: selectPlayer, checked: c, enable: e">
+                                </div>
+                                <div>P<sub data-bind="text: idx()"></sub> :</div>
+                                <div data-bind="foreach: ss">
+                                    <div data-bind="if: $index() != 0">,</div>
+                                    <div>s<sub data-bind="text: ($index()+1) + '' + $parent.idx()"></sub> =</div>
+                                    <div data-bind="text: $data.toString(10)"></div>
+                                </div><br>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div data-bind="visible: pfix">
+                <div data-bind="foreach: fps">
+                    <div data-bind="foreach: Bs">
+                        <div>B<sub data-bind="text: $parent.idx() + '' + $index()"></sub> =</div>
+                        <div data-bind="text: $data.bytes()"></div><br>
+                    </div>
+                </div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                <div>R =</div>
+                <div data-bind="foreach: fps">
+                    <div data-bind="if: $index() != 0">+</div>
+                    <div>B<sub data-bind="text: idx() + '0'"></sub></div>
+                </div>
+                <div data-bind="text: '= ' + R().bytes()"></div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                <div data-bind="foreach: fps">
+                    <div>P<sub data-bind="text: idx()"></sub> :</div>
+                    <div data-bind="foreach: rs">
+                        <div data-bind="if: $index() != 0">,</div>
+                        <div>r<sub data-bind="text: $parent.idxs()[$index()] + '' + $parent.idx()"></sub> =</div>
+                        <div data-bind="text: $data.toString(10)"></div>
+                    </div><br>
+                </div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                <div>h(R,m) = </div>
+                <div data-bind="text: ha"></div>
+                <div>&nbsp;(Special value to make it easy.)</div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                <div data-bind="foreach: fps">
+                    <div>c<sub data-bind="text: idx"></sub> :</div>
+                    <div data-bind="text: cer().toString(10)"></div><br>
+                </div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                <div data-bind="foreach: fps">
+                    <div data-bind="html: verifyCertHtml()"></div><br>
+                </div>
+            </div>
+            <hr data-bind="visible: pfix">
+            <table data-bind="visible: pfix">
+                <tr>
+                    <td>
+                        <table>
+                            <tr data-bind="foreach: nup()">
+                                <td data-bind="html: html, css: css, attr: { rowspan: rowspan }"></td>
+                            </tr>
+                            <tr data-bind="foreach: dep()">
+                                <td data-bind="html: $data"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div data-bind="visible: !ans(), click: toggleAns" class="bq clickable">?</div>
+                        <div data-bind="visible: ans(),text: sigma"></div>
+                    </td>
+                </tr>
+            </table>
+            <hr data-bind="visible: pfix">
+        </div>
+        <div id="Etc" class="sheet">
+            <div>Etc</div><br>
+            <hr>
+            <div>x =&nbsp;</div><input type="text" data-bind="value: x"><br>
+            <div>xG = </div>
+            <div data-bind="text: xG"></div><br>
+            <hr>
+            <div>a =&nbsp;</div><input type="text" data-bind="value: a"><br>
+            <div>A =&nbsp;</div><input class="point" type="text" data-bind="value: A"><br>
+            <div>b =&nbsp;</div><input type="text" data-bind="value: b"><br>
+            <div>B =&nbsp;</div><input class="point" type="text" data-bind="value: B"><br>
+            <div>aA + bB = </div>
+            <div data-bind="text: aAbB"></div><br>
+            <hr>
+            <table>
+                <tr>
+                    <td>
+                        <textarea class="points" data-bind="value: data"></textarea><br>
+                    </td>
+                    <td class="calc">
+                        <img src="./calc.png" data-bind="click: addall"><br>
+                    </td>
+                </tr>
+            </table>
+            <div data-bind="html: rhtml"></div>
+            <hr>
         </div>
     </div>
+    <!--
+    <footer>&copy;2018 Digital Garage. All rights reserved.</footer>
+    -->
 </body>
 
 </html>
