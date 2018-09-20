@@ -63,6 +63,10 @@ td {
     text-align: right;
 }
 
+.mtop {
+    margin-top: 0.5em;
+}
+
 /** head */
 
 header {

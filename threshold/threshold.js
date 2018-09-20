@@ -61,6 +61,13 @@ class Tab {
     }
 }
 
+function toggle(target) {
+    let tag = $("[data-toggle='" + target + "']");
+    if (tag) {
+        tag.toggle();
+    }
+}
+
 // Shamir
 class Shamir {
     constructor(m, n) {
@@ -672,7 +679,7 @@ class Vss {
         return s.toString(10);
     }
     shtml() {
-        let html = "s";
+        let html = "&nbsp;s";
         let flg = true;
         for (let i = 0; i < this.ps().length; i++) {
             let p = this.ps()[i];
@@ -1181,7 +1188,7 @@ class SchnorrPlayer {
     }
     verifyCertHtml() {
         let html = "";
-        html += this.cer().toString(10) + "G =? ";
+        html += this.cer().toString(10) + "&times;G =? ";
         for (let i = 0; i < this.idxs().length; i++) {
             for (let j = 0; j < this.m(); j++) {
                 if (i != 0 || j != 0) {

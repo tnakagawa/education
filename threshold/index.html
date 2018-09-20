@@ -35,23 +35,27 @@
             </datalist>
             <div>(Prime number)</div><br>
             <hr>
-            <div>Dealer</div><br>
-            <div>Secret value : s =&nbsp;</div><input class="shs" type="text" data-bind="value: ns"> (s = a<sub>0</sub>)
-            <img class="icon" src="./dice.png" data-bind="click: setSecret"><br>
-            <div>Random values&nbsp;</div><img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
-            <!-- ko foreach: rs -->
-            a<sub data-bind="text: $index()+1"></sub> = <input class="shs" type="text" data-bind="value: r"><br>
-            <!-- /ko -->
+            <div class="clickable" data-bind="click: toggle.bind($data, 'shamir1')">Dealer</div><br>
+            <div data-toggle="shamir1">
+                <div>Secret value : s =&nbsp;</div><input class="shs" type="text" data-bind="value: ns"> (s = a<sub>0</sub>)
+                <img class="icon" src="./dice.png" data-bind="click: setSecret"><br>
+                <div>Random values&nbsp;</div><img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
+                <!-- ko foreach: rs -->
+                a<sub data-bind="text: $index()+1"></sub> = <input class="shs" type="text" data-bind="value: r"><br>
+                <!-- /ko -->
+            </div>
             <hr>
             <div data-bind="visible: viewPlayer()">
-                Dealer computes P<sub>i</sub> = <div data-bind="text: ns"></div>
-                <!-- ko foreach: rs -->
-                +
-                <div data-bind="text: r"></div>&times;i<sup data-bind="text: supnum($index()+1)"></sup>
-                <!-- /ko -->
-                mod
-                <div data-bind="text: p"></div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'shamir2')">
+                    Dealer computes P<sub>i</sub> = <div data-bind="text: ns"></div>
+                    <!-- ko foreach: rs -->
+                    +
+                    <div data-bind="text: r"></div>&times;i<sup data-bind="text: supnum($index()+1)"></sup>
+                    <!-- /ko -->
+                    mod
+                    <div data-bind="text: p"></div><br>
+                </div>
+                <table data-toggle="shamir2">
                     <tbody data-bind="foreach: fs">
                         <tr data-bind="html: $data"></tr>
                     </tbody>
@@ -59,8 +63,8 @@
             </div>
             <hr data-bind="visible: viewPlayer()">
             <div data-bind="visible: viewPlayer()">
-                <div>Players</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'shamir3')">Players</div><br>
+                <table data-toggle="shamir3">
                     <tbody data-bind="foreach: ps">
                         <tr>
                             <td class="shp">
@@ -78,7 +82,7 @@
                     </tbody>
                 </table>
                 <br>
-            </div><br>
+            </div>
             <hr data-bind="visible: viewSecret()">
             <div data-bind="visible: viewSecret()">
                 <table>
@@ -121,8 +125,9 @@
             <div data-bind="text: '(=' + x() + 'G)'"></div>
             <br>
             <hr>
-            <div>Each Player</div>&nbsp;<img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
-            <table>
+            <div class="clickable" data-bind="click: toggle.bind($data, 'vss1')">Each player sets random numbers</div>
+            <img class="icon" src="./dice.png" data-bind="click: setRandom"><br>
+            <table data-toggle="vss1">
                 <tbody data-bind="foreach: {data: ps, as: 'p' }">
                     <tr>
                         <td>P<sub data-bind="text: p.idx()"></sub></td>
@@ -141,8 +146,8 @@
                 </tbody>
             </table>
             <hr>
-            <div data-bind="visible: fixRandom()">Each Player<br></div>
-            <table data-bind="visible: fix">
+            <div class="clickable" data-bind="visible: fixRandom(), click: toggle.bind($data, 'vss2')">Each player<br></div>
+            <table data-bind="visible: fix" data-toggle="vss2">
                 <tbody data-bind="foreach: {data: ps, as: 'p1' }">
                     <tr class="topm">
                         <td class="left topm">P<sub data-bind="text: p1.idx()"></sub>&nbsp;</td>
@@ -179,8 +184,8 @@
             </table>
             <hr data-bind="visible: fix">
             <div data-bind="visible: fix">
-                <div>Each player broadcasts commitments</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'vss3')">Each player broadcasts commitments</div><br>
+                <table data-toggle="vss3">
                     <tbody data-bind="foreach: {data: ps, as: 'p' }">
                         <!-- ko foreach: cs -->
                         <tr>
@@ -207,8 +212,8 @@
             </div>
             <hr data-bind="visible: fix">
             <div data-bind="visible: fix">
-                <div>Each player verifies commitments</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'vss4')">Each player verifies commitments</div><br>
+                <table data-toggle="vss4">
                     <tbody data-bind="foreach: {data: ps, as: 'p1' }">
                         <!-- ko foreach: {data: $parent.ps, as: 'p2' } -->
                         <!-- ko if: p1.idx() != p2.idx() -->
@@ -241,8 +246,8 @@
             </div>
             <hr data-bind="visible: fix">
             <div data-bind="visible: fix">
-                <div>Each player broadcasts</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'vss5')">Each player broadcasts</div><br>
+                <table data-toggle="vss5">
                     <tbody data-bind="foreach: {data: ps, as: 'p' }">
                         <!-- ko foreach: ps -->
                         <tr>
@@ -268,8 +273,8 @@
             </div>
             <hr data-bind="visible: fix">
             <div data-bind="visible: fix">
-                <div>Each player verifies</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'vss6')">Each player verifies</div><br>
+                <table data-toggle="vss6">
                     <tbody data-bind="foreach: {data: ps, as: 'p1' }">
                         <!-- ko foreach: {data: $parent.ps, as: 'p2' } -->
                         <!-- ko if: p1.idx() != p2.idx() -->
@@ -312,8 +317,8 @@
             </div>
             <hr data-bind="visible: fix">
             <div data-bind="visible: fix">
-                <div>Players</div><br>
-                <table>
+                <div class="clickable" data-bind="click: toggle.bind($data, 'vss7')">Players</div><br>
+                <table data-toggle="vss7">
                     <tbody data-bind="foreach: ps">
                         <tr>
                             <td class="shp">
@@ -364,14 +369,14 @@
             <div data-bind="text: H.bytes()"></div>
             <div data-bind="text: '(=' + x() + 'G)'"></div><br>
             <hr>
-            <div data-bind="foreach: ps">
+            <div class="clickable" data-bind="click: toggle.bind($data, 'schnorr1')">Key</div>
+            <div class="mtop" data-bind="foreach: ps" data-toggle="schnorr1">
                 <div data-bind="foreach: As">
                     <div>A<sub data-bind="text: $parent.idx() + '' + $index()"></sub> =</div>
                     <div data-bind="text: $data.bytes()"></div><br>
                 </div>
-            </div>
-            <hr>
-            <div>P =</div>
+            </div><br>
+            <div class="mtop">P =</div>
             <div data-bind="foreach: ps">
                 <div data-bind="if: $index() != 0">+</div>
                 <div>A<sub data-bind="text: idx() + '0'"></sub></div>
@@ -399,21 +404,21 @@
             </table>
             <hr>
             <div data-bind="visible: pfix">
-                <div data-bind="foreach: fps">
+                <div class="clickable" data-bind="click: toggle.bind($data, 'schnorr2')">Random</div>
+                <div class="mtop" data-bind="foreach: fps" data-toggle="schnorr2">
                     <div data-bind="foreach: Bs">
                         <div>B<sub data-bind="text: $parent.idx() + '' + $index()"></sub> =</div>
                         <div data-bind="text: $data.bytes()"></div><br>
                     </div>
+                </div><br>
+                <div class="mtop">
+                    <div>R =</div>
+                    <div data-bind="foreach: fps">
+                        <div data-bind="if: $index() != 0">+</div>
+                        <div>B<sub data-bind="text: idx() + '0'"></sub></div>
+                    </div>
+                    <div data-bind="text: '= ' + R().bytes()"></div>
                 </div>
-            </div>
-            <hr data-bind="visible: pfix">
-            <div data-bind="visible: pfix">
-                <div>R =</div>
-                <div data-bind="foreach: fps">
-                    <div data-bind="if: $index() != 0">+</div>
-                    <div>B<sub data-bind="text: idx() + '0'"></sub></div>
-                </div>
-                <div data-bind="text: '= ' + R().bytes()"></div>
             </div>
             <hr data-bind="visible: pfix">
             <div data-bind="visible: pfix">
@@ -464,6 +469,10 @@
                     </td>
                 </tr>
             </table>
+            <hr data-bind="visible: pfix">
+            <div data-bind="visible: pfix">
+                &sigma;G =? R + h(R,m)P
+            </div>
             <hr data-bind="visible: pfix">
         </div>
         <div id="Etc" class="sheet">
