@@ -95,7 +95,7 @@ class Shamir {
         return this.s();
     }
     setSecret() {
-        this.s(rnd(this.p()).toString());
+        this.s(rndnz(this.p()).toString());
         for (let i = 0; i < this.ps().length; i++) {
             let player = this.ps()[i];
             player.c(false);
@@ -104,7 +104,7 @@ class Shamir {
     setRandom() {
         for (let i = 0; i < this.rs().length; i++) {
             let item = this.rs()[i];
-            item.r = rnd(this.p()).toString();
+            item.r = rndnz(this.p()).toString();
         }
         for (let i = 0; i < this.ps().length; i++) {
             let player = this.ps()[i];
@@ -1318,6 +1318,9 @@ function rnd(i) {
 }
 
 function rndnz(i) {
+    if (i < 1) {
+        return BigInteger.ZERO;
+    }
     let r = rnd(i);
     if (r.toString(10) == "0") {
         return rndnz(i);
