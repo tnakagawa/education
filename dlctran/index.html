@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DLC Transaction</title>
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./dlctran.css">
+    <script src="./lib/jquery-3.3.1.min.js"></script>
+    <script src="./lib/knockout-3.4.2.js"></script>
+    <script src="./lib/jsrsasign-all-min.js"></script>
+    <script src="../btctools/bech32.js"></script>
+    <script src="./dlctran.js"></script>
+</head>
+
+<body>
+
+    <!-- header -->
+    <header id="header">
+        <div class="tabs">
+            <div class="tab" data-bind="foreach: tabs">
+                <div data-bind="text: title, click: $parent.show.bind($parent, $data);, css: css"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- book -->
+    <div class="book">
+        <div id="dlctran" class="sheet">
+            <h3 class="clickable" data-bind="click: toggle.bind($data, 'pubkey')">Public key</h3>
+            <table data-toggle="pubkey">
+                <tr>
+                    <td>Alice</td>
+                    <td>&nbsp;Wallet&nbsp;</td>
+                    <td>
+                        <div data-bind="text: Util.p2s(Alice.P0)"></div><br>
+                        <div data-bind="text: Util.addr(Alice.P0)"></div><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&nbsp;DLC</td>
+                    <td>
+                        <div data-bind="text: Util.p2s(Alice.P1)"></div><br>
+                        <div data-bind="text: Util.addr(Alice.P1)"></div><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td>&nbsp;Wallet&nbsp;</td>
+                    <td>
+                        <div data-bind="text: Util.p2s(Bob.P0)"></div><br>
+                        <div data-bind="text: Util.addr(Bob.P0)"></div><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&nbsp;DLC</td>
+                    <td>
+                        <div data-bind="text: Util.p2s(Bob.P1)"></div><br>
+                        <div data-bind="text: Util.addr(Bob.P1)"></div><br>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <h3 class="clickable" data-bind="click: toggle.bind($data, 'precmd')">Preparation</h3>
+            <textarea class="precmd" data-bind="value: precmd()" data-toggle="precmd"></textarea>
+            <hr>
+            <h3 class="clickable" data-bind="click: toggle.bind($data, 'utxos')">UTXOs of Alice and Bob</h3>
+            <table data-toggle="utxos">
+                <tr>
+                    <td></td>
+                    <td>&nbsp;txid</td>
+                    <td>idx</td>
+                </tr>
+                <tr>
+                    <td>Alice</td>
+                    <td>
+                        &nbsp;<input type="text" class="txid" data-bind="value: Alice.txid">
+                    </td>
+                    <td>
+                        <input type="number" class="vout" max="9" min="0" data-bind="value: Alice.vout">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td>
+                        &nbsp;<input type="text" class="txid" data-bind="value: Bob.txid">
+                    </td>
+                    <td>
+                        <input type="number" class="vout" max="9" min="0" data-bind="value: Bob.vout">
+                    </td>
+                </tr>
+            </table>
+            <div class="w100" data-bind="visible: view()">
+                <hr>
+                <h3 class="clickable" data-bind="click: toggle.bind($data, 'fundtx')">Fund Transaction (no signature)</h3>
+                <div class="w100" data-toggle="fundtx">
+                    <textarea class="fundtx" data-bind="value: fundtx().serialize()"></textarea><br>
+                    <div>txid :&nbsp;<div data-bind="text: fundtx().id()"></div>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="clickable" data-bind="click: toggle.bind($data, 'cetsig')">
+                    Alice/Bob send signature of CETs to Bob/Alice.</h3>
+                <div class="w100" data-toggle="cetsig">
+                    <div data-bind="text: exchangeSigs()"></div>
+                </div>
+                <hr>
+                <h3 class="clickable" data-bind="click: toggle.bind($data, 'fundtxs')">
+                    Fund Transaction (with signature)</h3>
+                <div class="w100" data-toggle="fundtxs">
+                    <textarea class="fundtxs" data-bind="value: fundtxwithsig().serialize()"></textarea>
+                </div>
+                <hr>
+                <h3 class="clickable" data-bind="click: toggle.bind($data, 'usrmsg')">
+                    Which user and message are you sending?
+                </h3>
+                <table data-toggle="usrmsg">
+                    <tr>
+                        <td>&nbsp;User</td>
+                        <td>&nbsp;Message</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;<label><input type="radio" name="user" value="Alice" data-bind="checked: User">&nbsp;Alice</label><br>
+                        </td>
+                        <td>
+                            &nbsp;<label><input type="radio" name="msg" value="Fine" data-bind="checked: Olivia.Msg">&nbsp;Fine</label><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;<label><input type="radio" name="user" value="Bob" data-bind="checked: User">&nbsp;Bob</label><br>
+                        </td>
+                        <td>
+                            &nbsp;<label><input type="radio" name="msg" value="Rain" data-bind="checked: Olivia.Msg">&nbsp;Rain</label><br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="w100" data-bind="visible: view2()">
+                <hr>
+                <h3 class="clickable" data-bind="text: 'CET ' + User() + ' sends',click: toggle.bind($data, 'sendcet')"></h3>
+                <div class="w100" data-toggle="sendcet">
+                    <textarea class="sendcet" data-bind="value: sendcet().serialize()"></textarea>
+                    <div>txid :&nbsp;<div data-bind="text: sendcet().id()"></div>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="clickable" data-bind="text: 'From CET to ' + User() + '\'s wallet',click: toggle.bind($data, 'towallet')"></h3>
+                <div class="w100" data-toggle="towallet">
+                    <textarea class="towallet" data-bind="value: towallet().serialize()"></textarea>
+                    <div>txid :&nbsp;<div data-bind="text: towallet().id()"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div id="etc" class="sheet">
+        </div>
+    </div>
+
+</body>
+
+</html>
