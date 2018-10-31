@@ -16,6 +16,9 @@ transaction editorなど
 - [m-of-n threshold](https://tnakagawa.github.io/education/threshold/index.html)<br>
 m-of-n しきい値
 
+- [dlc transaction](https://tnakagawa.github.io/education/dlctran/index.html)<br>
+DLC Transaction
+
 ## ライセンス
 
 一部のコード（ライブラリなど）を除いたコードのライセンスは以下のとおりです。
