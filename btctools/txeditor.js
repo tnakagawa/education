@@ -522,8 +522,14 @@ class Script {
                         let data = Util.hex(code);
                         if (data) {
                             let len = data.length / 2;
-                            if (len < 0x00fd) {
+                            if (len < 0x004c) {
                                 hex += Util.n2h(len, 2) + data;
+                            } else if (len < 0x0100) {
+                                // OP_PUSHDATA1
+                                hex += "4c" + Util.n2h(len, 2) + data;
+                            } else if (len < 0x0209) {
+                                // OP_PUSHDATA2
+                                hex += "4d" + Util.n2h(len, 4) + data;
                             } else {
                                 this.errors.push("Sorry too long Hex Length. " + data);
                             }
