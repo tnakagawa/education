@@ -1,5 +1,5 @@
 
-const SLIDO_URL = "https://app2.sli.do/event/cev8nwhm/questions";
+const SLIDO_URL = "https://app2.sli.do/event/xxxxx/questions";
 
 function init() {
     let headers = document.getElementsByTagName("header");
