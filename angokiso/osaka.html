@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./osaka.css">
+    <script src="./lib/jsrsasign-all-min.js"></script>
+    <script src="./osaka.js"></script>
+    <title>暗号の体験</title>
+</head>
+
+<body>
+    <div class="header">
+        <div>暗号の体験（trial of crypto）</div>
+    </div>
+    <div class="body">
+        <div class="container">
+            <header>hash &amp; proof-of-work</header>
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            Name : <input id="hname" type="text" value="">
+                            <img id="hfast" src="./img/fast.png">
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="hinput" type="text" value="">
+                        </td>
+                        <td>
+                            <img id="hplay" src="./img/play.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="hvalue">
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td id="mininput"></td>
+                        <td>
+                            <img id="hshare" src="./img/share.png">
+                            <textarea id="hcopy"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="minvalue"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+        <div class="container">
+            <header>Diffie-Hellman key exchange</header>
+            <section>
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            共有 (common parameter) /
+                            g:<input id="dhg" class="dhnum" type="number" min="0">
+                            p:<input id="dhp" class="dhnum" type="number" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dhkey">秘密鍵 (secret key) : </td>
+                        <td><input id="dhsk" class="dhnum" type="number" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>公開鍵 (public key) : </td>
+                        <td>
+                            <span id="dhgen"></span><sup id="dhsk1"></sup> mod <span id="dhp1"></span>
+                            = <span id="dhpk1"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>共有鍵 (shared key) : </td>
+                        <td>
+                            <input id="dhpk" class="dhnum" type="number" min="0"><sup id="dhsk2"></sup> mod <span id="dhp2"></span>
+                            = <span id="dhpk2"></span>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+        <div class="container">
+            <header>Threshold secret sharing</header>
+            <section>
+                <table>
+                    <tr>
+                        <td>3 of 5 Shamir's Secret Sharing</td>
+                    </tr>
+                    <tr>
+                        <td>Prime number :
+                            <select id="tp">
+                                <option value="97">97</option>
+                                <option value="997">997</option>
+                                <option value="9973">9973</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <datalist id="Shamir's prime number">
+                        <option value="97">97</option>
+                        <option value="997">997</option>
+                        <option value="9973">9973</option>
+                    </datalist>
+                </table>
+                <hr>
+                <table>
+                    <tr>
+                        <td>Dealer</td>
+                        <td><img id="trand" src="./img/dice.png"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="key">s=a<sub>0</sub>=</td>
+                        <td><input id="ts"></td>
+                        <td>(secret value)</td>
+                    </tr>
+                    <tr>
+                        <td class="key">a<sub>1</sub>=</td>
+                        <td><input id="ta1"></td>
+                        <td>(random value)</td>
+                    </tr>
+                    <tr>
+                        <td class="key">a<sub>2</sub>=</td>
+                        <td><input id="ta2"></td>
+                        <td>(random value)</td>
+                    </tr>
+                </table>
+                <div id="tfunc">
+                    <hr>
+                    <table>
+                        <tr>
+                            <td id="tfi" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td id="tf1"></td>
+                            <td id="tfs1"></td>
+                        </tr>
+                        <tr>
+                            <td id="tf2"></td>
+                            <td id="tfs2"></td>
+                        </tr>
+                        <tr>
+                            <td id="tf3"></td>
+                            <td id="tfs3"></td>
+                        </tr>
+                        <tr>
+                            <td id="tf4"></td>
+                            <td id="tfs4"></td>
+                        </tr>
+                        <tr>
+                            <td id="tf5"></td>
+                            <td id="tfs5"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tselect">
+                    <hr>
+                    <table>
+                        <tr>
+                            <td>Players</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="tps" id="tc1" value="">
+                                    <span id="tcv1"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="tps" id="tc2" value="">
+                                    <span id="tcv2"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="tps" id="tc3" value="">
+                                    <span id="tcv3"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="tps" id="tc4" value="">
+                                    <span id="tcv4"></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" name="tps" id="tc5" value="">
+                                    <span id="tcv5"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="tlp">
+                    <hr>
+                    <table>
+                        <tr>
+                            <td id="trf" colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <td id="trv"></td>
+                            <td>&nbsp;=&nbsp;</td>
+                            <td><span id="trs"></span><img id="tri" src="./img/question.png"></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <br><br>
+    <!--
+    <table>
+        <tr>
+            <td rowspan="2">s = y<sub>1</sub></td>
+            <td class="de">x<sub>2</sub>&middot;x<sub>3</sub></td>
+            <td rowspan="2">&nbsp;+ y<sub>2</sub></td>
+            <td class="de">x<sub>1</sub>&middot;x<sub>3</sub></td>
+            <td rowspan="2">&nbsp;+ y<sub>3</sub></td>
+            <td class="de">x<sub>1</sub>&middot;x<sub>2</sub></td>
+            <td rowspan="2">&nbsp;mod p</td>
+        </tr>
+        <tr>
+            <td>(x<sub>2</sub>-x<sub>1</sub>)(x<sub>3</sub>-x<sub>1</sub>)</td>
+            <td>(x<sub>1</sub>-x<sub>2</sub>)(x<sub>3</sub>-x<sub>2</sub>)</td>
+            <td>(x<sub>1</sub>-x<sub>3</sub>)(x<sub>2</sub>-x<sub>3</sub>)</td>
+        </tr>
+    </table>
+    -->
+    <div class="footer">
+        Copyright &copy; DG Technologies, Inc. All rights reserved.
+    </div>
+    <div id="toast">TOAST</div>
+</body>
+
+</html>
