@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16pt;
+    font-family: monospace;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 2px dashed #8C8B8B;
+}
+
+div.header {
+    width: 100%;
+}
+
+div.header div {
+    width: 980px;
+    margin: auto;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#toast {
+    position: fixed;
+    width: 500px;
+    background-color: gray;
+    color: white;
+    border-radius: 50px;
+    padding: 10px;
+    text-align: center;
+    top: 50px;
+    left: 100px;
+    display: none;
+}
+
+header {
+    border-radius: 10px 10px 0px 0px;
+    width: 960px;
+    background-color: #FF9900;
+    color: white;
+    padding: 5px 10px;
+    user-select: none;
+    cursor: pointer;
+}
+
+section {
+    position: relative;
+    display: none;
+}
+
+div.footer {
+    position: fixed;
+    font-size: 9pt;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    z-index: -100;
+}
+
+.body {
+    width: 1000px;
+    margin: auto;
+}
+
+.container {
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5em;
+    border: 1px solid #FF9900;
+    border-radius: 12px 12px 0px 0px;
+}
+
+.container section img {
+    margin-bottom: -10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#hinput {
+    width: 50em;
+    font-size: 12pt;
+    height: 1.5em;
+    border: none;
+}
+
+#hvalue {
+    height: 1em;
+    font-size: 12pt;
+}
+
+#mininput {
+    height: 1em;
+    font-size: 12pt;
+    width: 50em;
+}
+
+#minvalue {
+    height: 1em;
+    font-size: 12pt;
+    width: 50em;
+}
+
+#hcopy {
+    width: 1px;
+    height: 1px;
+    border: none;
+    resize: none;
+    z-index: -1;
+}
+
+.dhnum {
+    width: 3em;
+    text-align: center;
+}
+
+td {
+    white-space: nowrap;
+}
+
+sup {
+    font-size: 10pt;
+}
+
+sub {
+    font-size: 10pt;
+}
+
+.dhkey {
+    width: 5em;
+}
+
+.container section table {
+    margin-left: 5px;
+}
+
+.container section table td {
+    height: 1.5em;
+}
+
+#dhpk {
+    color: red;
+}
+
+#dhpk1 {
+    color: red;
+    font-weight: bold;
+}
+
+#dhpk2 {
+    color: purple;
+    font-weight: bold;
+}
+
+#dhsk {
+    color: blue;
+}
+
+#dhsk1 {
+    font-weight: bold;
+    color: blue;
+}
+
+#dhsk2 {
+    font-weight: bold;
+    color: blue;
+}
+
+select {
+    background: transparent;
+}
+
+td.key {
+    text-align: right;
+}
+
+#ts {
+    width: 2em;
+    text-align: center;
+    color: blue;
+    font-weight: bold;
+}
+
+#ta1 {
+    width: 2em;
+    text-align: center;
+}
+
+#ta2 {
+    width: 2em;
+    text-align: center;
+}
+
+#tfunc {
+    display: none;
+}
+
+#tselect {
+    display: none;
+}
+
+#tlp {
+    display: none;
+}
+
+#trs {
+    color: blue;
+    font-weight: bold;
+    display: none;
+}
+
+label {
+    user-select: none;
+    cursor: pointer;
+}
+
+td.de {
+    text-align: center;
+    border-bottom: 2px solid black;
+}
