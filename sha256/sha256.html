@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>SHA-256</title>
+    <link rel="shortcut icon" href="../favicon.ico">
     <script src="./sha256.js"></script>
     <script src="./TestSha256Short.js"></script>
     <script src="./TestSha256Long.js"></script>
     <script>
         function init() {
             let result = test(TEST_VECTOR_SHA256_SHORT);
-            console.log("TEST_VECTOR_SHA256_SHORT", result);
+            document.getElementById("sm").innerHTML = result;
             result = test(TEST_VECTOR_SHA256_LONG);
-            console.log("TEST_VECTOR_SHA256_SHORT", result);
+            document.getElementById("lm").innerHTML = result;
         }
         function test(tv) {
             for (let i = 0; i < tv.length; i += 2) {
@@ -32,10 +33,47 @@
         }
         window.addEventListener("load", init);
     </script>
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 14pt;
+        }
+
+        #page {
+            width: 800px;
+            margin: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 
 <body>
-
+    <div id="page">
+        <h2>FIPS 180-4</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>SHA Test Vectors for Hashing Byte-Oriented Messages</th>
+                    <th>Test Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SHA-256 ShortMsg</td>
+                    <td id="sm"></td>
+                </tr>
+                <tr>
+                    <td>SHA-256 LongMsg</td>
+                    <td id="lm"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
