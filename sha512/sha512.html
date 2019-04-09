@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SHA-512</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="./sha512.js"></script>
+    <script src="./TestSha512Short.js"></script>
+    <script src="./TestSha512Long.js"></script>
+    <script>
+        function init() {
+            setTimeout(doTest, 100);
+        }
+        function doTest() {
+            let result = test(TEST_VECTOR_SHA512_SHORT);
+            document.getElementById("sm").innerHTML = result;
+            result = test(TEST_VECTOR_SHA512_LONG);
+            document.getElementById("lm").innerHTML = result;
+        }
+        function test(tv) {
+            for (let i = 0; i < tv.length; i += 2) {
+                let msg = [];
+                if (tv[i].Len > 0) {
+                    for (let j = 0; j < tv[i].Msg.length; j += 2) {
+                        msg[j / 2] = parseInt(tv[i].Msg.substr(j, 2), 16);
+                    }
+                }
+                let hash = compute(padding(msg));
+                let hs = hash2str(hash);
+                if (!(hs == tv[i].MD)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        window.addEventListener("load", init);
+    </script>
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 14pt;
+        }
+
+        #page {
+            width: 800px;
+            margin: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+        <h2>FIPS 180-4</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>SHA Test Vectors for Hashing Byte-Oriented Messages</th>
+                    <th>Test Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SHA-512 ShortMsg</td>
+                    <td id="sm"></td>
+                </tr>
+                <tr>
+                    <td>SHA-512 LongMsg</td>
+                    <td id="lm"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
