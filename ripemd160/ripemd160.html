@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RIPEMD-160</title>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="./ripemd160.js"></script>
+    <script src="./TestRipemd160.js"></script>
+    <script>
+        function init() {
+            console.log(TEST_VECTOR_RIPEMD160.length);
+            for (let i = 0; i < TEST_VECTOR_RIPEMD160.length; i++) {
+                let test = TEST_VECTOR_RIPEMD160[i];
+                let m = [];
+                for (let j = 0; j < test.data.length; j++) {
+                    m[j] = test.data.charCodeAt(j);
+                }
+                let p = padding(m);
+                let h = compute(p);
+                let hash = bs2hex(h);
+                console.log(test.title, hash, hash == test.hash);
+                let html = "<tr>";
+                html += "<td>" + test.title + "</td>"
+                html += "<td>" + hash + "</td>"
+                html += "<td>" + (hash == test.hash) + "</td>"
+                html += "</tr>\n"
+                document.getElementById("results").innerHTML += html;
+            }
+        }
+        window.addEventListener("load", init);
+    </script>
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 10pt;
+        }
+
+        #page {
+            width: 800px;
+            margin: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+        <h2>B Test Values</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Hash</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
