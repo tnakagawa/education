@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <title>ChaCha20 & Poly1305</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        #page {
+            margin: 0 auto;
+            width: 1024px;
+        }
+    </style>
+    <script src="./chacha20poly1305.js"></script>
+    <script src="./chacha20poly1305_test.js"></script>
+    <script>
+        function init() {
+            let test = null;
+            test = TestA1();
+            addLog(test);
+            test = TestA2();
+            addLog(test);
+            test = TestA3();
+            addLog(test);
+            test = TestA4();
+            addLog(test);
+            test = TestA5();
+            addLog(test);
+        }
+        function addLog(test) {
+            if (test) {
+                for (let i = 0; i < test.logs.length; i++) {
+                    document.getElementById("logs").innerHTML += "<div>" + test.logs[i] + "</div>";
+                }
+            }
+        }
+        window.addEventListener("load", init);
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <h2>Reference</h2>
+        <a href="https://tools.ietf.org/html/rfc8439" target="_blank">RFC-8439 : ChaCha20 and Poly1305 for IETF
+            Protocols</a><br>
+        <a href="https://cr.yp.to/chacha/chacha-20080128.pdf" target="_blank">ChaCha20</a><br>
+        <a href="https://cr.yp.to/mac/poly1305-20050329.pdf" target="_blank">Poly1305</a><br>
+        <h2>Test Logs</h2>
+        <div id="logs">
+        </div>
+    </div>
+</body>
+
+</html>
