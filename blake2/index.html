@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <title>blake2</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        #page {
+            margin: 0 auto;
+            width: 1024px;
+        }
+
+        #logs {
+            height: 20em;
+            overflow: auto;
+            border: solid 1px black;
+            padding: 5px;
+        }
+    </style>
+    <script src="./blake2s.js"></script>
+    <script src="./blake2s_test.js"></script>
+    <script>
+        function init() {
+            let test = TestAppendixB();
+            addLog(test);
+            test = TestVectors();
+            addLog(test);
+            var obj = document.getElementById("logs");
+            obj.scrollTop = obj.scrollHeight;
+        }
+        function addLog(test) {
+            if (test) {
+                for (let i = 0; i < test.logs.length; i++) {
+                    document.getElementById("logs").innerHTML += "<div>" + test.logs[i] + "</div>";
+                    console.log(test.logs[i]);
+                }
+            }
+        }
+        window.addEventListener("load", init);
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <h2>Reference</h2>
+        <a href="https://tools.ietf.org/html/rfc7693" target="_blank">RFC-7693 : The BLAKE2 Cryptographic Hash and
+            Message Authentication Code (MAC)</a><br>
+        <a href="https://ja.wikipedia.org/wiki/BLAKE" target="_blank">BLAKE - Wikipedia</a><br>
+        <a href="https://blake2.net/" target="_blank">BLAKE2 — fast secure hashing</a><br>
+        <a href="https://github.com/BLAKE2/" target="_blank">Github</a><br>
+        <h2>Test Logs</h2>
+        <div id="logs">
+        </div>
+    </div>
+</body>
+
+</html>
