@@ -19,6 +19,10 @@ m-of-n しきい値
 - [dlc transaction](https://tnakagawa.github.io/education/dlctran/index.html)<br>
 DLC Transaction
 
+- [hash function](https://tnakagawa.github.io/education/hash/index.html)<br>
+Hash Function
+
+
 ## ライセンス
 
 一部のコード（ライブラリなど）を除いたコードのライセンスは以下のとおりです。
