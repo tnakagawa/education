@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    font-family: monospace;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+#main {
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+button.action {
+    width: 200px;
+    height: 2em;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 100vh;
+    background-color: #4F81BD;
+    color: white;
+    font-weight: bold;
+}
+
+button.reload {
+    width: 100px;
+    height: 2em;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 100vh;
+    background-color: darkgray;
+    color: white;
+    font-weight: bold;
+}
+
+#header {
+    text-align: right;
+    padding: 10px 0px;
+}
+
+#create {
+    padding: 10px;
+}
+
+#sign {
+    padding: 10px;
+    display: none;
+}
+
+#verify {
+    padding: 10px;
+    display: none;
+}
+
+div.cap {
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 15px 5px 5px 5px;
+}
+
+th.v_i {
+    width: 45px;
+}
+
+th.v_j {
+    width: 500px;
+}
+
+.keys_table {
+    display: block;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.keys_table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: lightblue;
+}
+
+.keys_table th, td {
+    font-size: 12pt;
+    border: 1px solid lightblue;
+}
+
+.keys_table td {
+    text-align: center;
+}
+
+.message td {
+    max-width: 800px;
+    overflow-x: auto;
+}
+
+.message th {
+    text-align: left;
+    background-color: lightblue;
+}
+
+.message th, td {
+    font-size: 12pt;
+    border: 1px solid lightblue;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+#keys {
+    display: none;
+}
+
+#signBefore table tr td {
+    border: none;
+}
+
+#signAfter {
+    display: none;
+}
+
+#targetMessage {
+    border: 1px solid lightblue;
+    padding: 5px;
+    height: 1.5em;
+    width: 20em;
+}
+
+#verifyAfter {
+    display: none;
+}

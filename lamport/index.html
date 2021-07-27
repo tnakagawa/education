@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamport one-time signature</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="header">
+            <button id="reload_btn" class="reload">RELOAD</button>
+        </div>
+        <div id="create">
+            <hr><br>
+            <button id="create_btn" class="action">Create Keys</button>
+            <div id="keys">
+                <div class="cap">Private Keys（秘密鍵）</div>
+                <table class="keys_table">
+                    <thead>
+                        <tr>
+                            <th class="v_i">i</th>
+                            <th class="v_j">j=0</th>
+                            <th class="v_j">j=1</th>
+                        </tr>
+                    </thead>
+                    <tbody id="private_keys">
+                    </tbody>
+                </table>
+                <div class="cap">Public Keys（公開鍵）</div>
+                <table class="keys_table">
+                    <thead>
+                        <tr>
+                            <th class="v_i">i</th>
+                            <th class="v_j">j=0</th>
+                            <th class="v_j">j=1</th>
+                        </tr>
+                    </thead>
+                    <tbody id="public_keys">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="sign">
+            <hr><br>
+            <div id="signBefore">
+                <table>
+                    <tr>
+                        <td><input id="targetMessage" type="text" value="hogehoge"></td>
+                        <td><button id="sign_btn" class="action">Sign Messages</button><br></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="signAfter">
+                <table class="message">
+                    <tr>
+                        <th>Message（メッセージ）</th>
+                        <td id="message"></td>
+                    </tr>
+                    <tr>
+                        <th>Hash Hex（ハッシュ値、16進数）</th>
+                        <td id="hashHex"></td>
+                    </tr>
+                    <tr>
+                        <th>Hash Bits（ハッシュ値、2進数）</th>
+                        <td id="hashBits"></td>
+                    </tr>
+                </table>
+                <div class="cap">Signature（署名値）</div>
+                <table class="keys_table">
+                    <thead>
+                        <tr>
+                            <th class="v_i">i</th>
+                            <th class="v_j">s</th>
+                        </tr>
+                    </thead>
+                    <tbody id="signatures">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="verify">
+            <hr><br>
+            <div id="verifyBefore">
+                <button id="verify_btn" class="action">Verify Messages</button>
+            </div>
+            <div id="verifyAfter">
+                <div class="cap">Verify（検証）</div>
+                <table class="keys_table">
+                    <thead>
+                        <tr>
+                            <th class="v_i">i</th>
+                            <th class="v_j">Signature Hash</th>
+                            <th class="v_j">Public key</th>
+                            <th class="v_i">Match</th>
+                        </tr>
+                    </thead>
+                    <tbody id="verifyResults">
+                    </tbody>
+                </table>
+                <div id="result" class="cap"></div>
+            </div>
+        </div>
+        <hr><br><br><br>
+    </div>
+</body>
+
+</html>
