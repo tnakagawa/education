@@ -1,0 +1,72 @@
+* {
+    font-size: 12pt;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: scroll;
+}
+
+#main {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+button {
+    width: 200px;
+    height: 2em;
+    cursor: pointer;
+}
+
+table {
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+}
+
+hr {
+    margin-top: 10px;
+}
+
+#sv {
+    margin-top: 10px;
+}
+
+#sv th {
+    width: 5%;
+    height: 1.75em;
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#sv td {
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding-left: 7px;
+}
+
+#test {
+    margin-top: 10px;
+}
+
+#test th:first-child {
+    width: 50px;
+}
+
+#test th {
+    height: 1.5em;
+    border: 1px solid gray;
+    white-space: nowrap;
+}
+
+#test td {
+    height: 1.5em;
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding-left: 7px;
+}
