@@ -100,6 +100,9 @@ function test() {
  * @returns 32バイト16進数文字列
  */
 function hex32(x) {
+    if (x == null) {
+        return 'null';
+    }
     return x.toString(16).padStart(64, '0').toUpperCase();
 }
 
@@ -131,13 +134,20 @@ function ECDSAPUBKEY(x) {
  * 署名値生成
  * @param {bigint} e メッセージハッシュ
  * @param {bigint} x 秘密鍵
- * @returns 署名値
+ * @returns 署名データ
  */
 function ECDSASIGN(e, x) {
     let k = rnd32() % n;
     let R = mulPoint(G, k);
-    // s = (e + x*R.x) / k
-    let s = mul(add(e, mul(x, R.x, n), n), inv(k, n), n);
+    let r = R.x;
+    if (r >= n) {
+        return ECDSASIGN(e, x);
+    }
+    // s = (e + xr) / k
+    let s = mul(add(e, mul(x, r, n), n), inv(k, n), n);
+    if (s == 0n) {
+        return ECDSASIGN(e, x);
+    }
     // 0 < s < n ÷ 2 + 1
     if (s > (n - 1n) / 2n) {
         s = n - s;
@@ -152,9 +162,9 @@ function ECDSASIGN(e, x) {
 /**
  * 署名値から公開鍵取得
  * @param {bigint} e メッセージハッシュ
- * @param {bigint} v 
- * @param {bigint} r 
- * @param {bigint} s 
+ * @param {bigint} v リカバリ識別子
+ * @param {bigint} r x座標
+ * @param {bigint} s 署名値
  * @returns 公開鍵
  */
 function ECDSARECOVER(e, v, r, s) {
@@ -164,14 +174,9 @@ function ECDSARECOVER(e, v, r, s) {
     if ((v & 1n) == (R.y & 1n)) {
         R.y = p - R.y;
     }
-    // sR
-    let sR = mulPoint(R, s);
-    // -eR
-    let inveG = mulPoint(G, sub(n, e, n));
-    // sR - eR
-    let sRinvsG = addPoint(sR, inveG);
-    // r^-1 * (sR - eR) 
-    return mulPoint(sRinvsG, inv(r, n));
+    // Q = r^{−1}(sR − eG)
+    let Q = mulPoint(addPoint(mulPoint(R, s), mulPoint(G, sub(n, e, n))), inv(r, n));
+    return Q;
 }
 
 // 楕円曲線演算（secp256k1）    
@@ -180,12 +185,12 @@ function ECDSARECOVER(e, v, r, s) {
 const b = 7n;
 // 楕円曲線の位数
 const p = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F');
-// 生成点
+// 生成元
 const G = {
     x: BigInt('0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798'),
     y: BigInt('0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8'),
 }
-// 生成点の位数
+// 生成元の位数
 const n = BigInt('0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141');
 
 /**
