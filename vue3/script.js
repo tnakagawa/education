@@ -14,6 +14,7 @@ const LifeCycle = {
     data() {
         return {
             counter: 0,
+            intervalID: null,
         }
     },
     beforeCreate() {
@@ -43,7 +44,8 @@ const LifeCycle = {
         console.log(this.$el);
         console.log(document.getElementById('cnt'));
         console.log('<<< mounted');
-        setInterval(() => {
+        this.intervalID = setInterval(() => {
+            console.log('count');
             this.counter++;
             if (this.counter > 2) {
                 app.unmount();
@@ -77,6 +79,9 @@ const LifeCycle = {
         console.log(this.$el);
         console.log(document.getElementById('cnt'));
         console.log('<<< unmounted');
+        if (this.intervalID) {
+            clearInterval(this.intervalID);
+        }
     },
 }
 
