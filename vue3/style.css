@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    font-family: monospace;
+}
+
+#main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#counter {
+    margin: 12px 0;
+}
