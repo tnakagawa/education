@@ -258,7 +258,7 @@ function mulPoint(P, k) {
  * @returns x + y mod p 
  */
 function add(x, y, p) {
-    return x + y % p;
+    return (x + y) % p;
 }
 
 /**
@@ -270,7 +270,7 @@ function add(x, y, p) {
  * @returns x - y mod p
  */
 function sub(x, y, p) {
-    let z = x - y % p;
+    let z = (x - y) % p;
     if (z < 0n) {
         z += p;
     }
@@ -285,7 +285,7 @@ function sub(x, y, p) {
  * @returns x * y mod p
  */
 function mul(x, y, p) {
-    return x * y % p;
+    return (x * y) % p;
 }
 
 
@@ -312,7 +312,7 @@ function pow(x, y, p) {
         if (y & 1n) {
             z = z * x % p;
         }
-        x = x * x % p;
+        x = (x * x) % p;
         y >>= 1n;
     }
     return z;
