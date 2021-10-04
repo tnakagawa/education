@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ツェラーの公式 | Zeller's congruence</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="page">
+        <br>
+        <h1>ツェラーの公式（Zeller's congruence）</h1>
+        <br>
+        <table>
+            <tr>
+                <td><select id="y"></select>&nbsp;年&nbsp;</td>
+                <td><select id="m"></select>&nbsp;月&nbsp;</td>
+                <td><select id="d"></select>&nbsp;日</td>
+                <td>
+                    <div id="dow"></div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div> C = [y/100] </div>
+        <div> Y = y mod 100 </div>
+        <div> h = (5C + Y + [Y/4] + [C/4] + [26(m+1)/10] + d) mod 7 </div>
+        <br>
+        <div id="f1"></div>
+        <div id="f2"></div>
+        <div id="f3"></div>
+        <div id="f4"></div>
+        <div id="f5"></div>
+        <div>h は 0～6で土曜日～金曜日</div>
+        <div id="ret"></div>
+    </div>
+</body>
+
+</html>
