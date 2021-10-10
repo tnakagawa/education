@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モンテカルロ法 | Monte Carlo method</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <br>
+        <h1>モンテカルロ法で円周率</h1>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>プロット総数</th>
+                    <th>円内プロット数</th>
+                    <th>π</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    <div id="total">-</div>
+                </td>
+                <td>
+                    <div id="in_circle">-</div>
+                </td>
+                <td>
+                    <div id="pi">-</div>
+                </td>
+                <td>
+                    <button id="btn">ADD</button>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <canvas id="c"></canvas>
+    </div>
+</body>
+
+</html>
