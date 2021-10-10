@@ -4,12 +4,13 @@
 }
 
 #main {
-    max-width: 1024px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 #c {
     border: 1px solid black;
+    margin: 0 auto;
 }
 
 #btn {
@@ -28,4 +29,8 @@ th {
 td {
     width: 25%;
     text-align: right;
+}
+
+div.center {
+    text-align: center;
 }
