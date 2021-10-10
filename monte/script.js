@@ -1,8 +1,10 @@
 
 // キャンパスサイズ
-const SIZE = 1024;
+const SIZE = 512;
 // プロット数
 const PLOT_NUM = 10000;
+// Uint16最大値
+const MAX_UINT16 = 2 ** 16 - 1;
 
 // プロット総数
 var total = 0;
@@ -35,19 +37,19 @@ function add() {
 // プロット
 function plot() {
     // 乱数生成
-    let xy = new Uint32Array(2);
+    let xy = new Uint16Array(2);
     window.crypto.getRandomValues(xy);
-    let x = xy[0] % SIZE;
-    let y = xy[1] % SIZE;
+    let x = xy[0];
+    let y = xy[1];
     let color = 'red';
     // 円内であるか判定
-    if (x * x + y * y < SIZE * SIZE) {
+    if (x * x + y * y < MAX_UINT16 * MAX_UINT16) {
         color = 'blue';
         inCircle++;
     }
     total++;
-    // 描写
-    draw(x, y, color);
+    // 描写（x、y座標をキャンパスサイズに修正）
+    draw(Math.floor(x * SIZE / MAX_UINT16), Math.floor(y * SIZE / MAX_UINT16), color);
 }
 
 // 描写
