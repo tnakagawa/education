@@ -1,0 +1,31 @@
+* {
+    font-family: monospace;
+    font-size: 16pt;
+}
+
+#main {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+#c {
+    border: 1px solid black;
+}
+
+#btn {
+    user-select: none;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: right;
+}
+
+td {
+    width: 25%;
+    text-align: right;
+}
