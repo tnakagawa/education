@@ -1,0 +1,87 @@
+button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 12pt;
+}
+
+.loading {
+    /* 画面最大 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* 背景色（黒、不透明度80%） */
+    background-color: #000000;
+    opacity: 0.8;
+    /* フレックスコンテナ（縦並べ、横中央、縦中央） */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* 表示を一番上 */
+    z-index: 999;
+    /* 選択付加 */
+    user-select: none;
+}
+
+.load-text {
+    color: white;
+    font-size: 16pt;
+}
+
+.load-blink {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.load-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 1);
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.load-blink-dot {
+    animation: blink-dot 1.2s linear infinite;
+    opacity: 0;
+}
+
+@keyframes blink-dot {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.load-spin {
+    animation: rotate2 2s linear infinite;
+}
+
+@keyframes rotate2 {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.load-absolute {
+    position: absolute;
+}
