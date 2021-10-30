@@ -26,9 +26,9 @@
         A 30 30 0 0 1 450 290
         " stroke="#0168B7" stroke-width="20" fill="#FFFFFF" />
     <path d="M 110 230
-        L 450 230
+        L 451 230
         " stroke="#0168B7" stroke-width="20" />
-    <path d="M 450 290
+    <path d="M 451 290
         L 376 290
         " stroke="#0168B7" stroke-width="20" />
     <path d="M 340 250
