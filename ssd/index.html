@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7セグメントディスプレイ | seven-segment display</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="page">
+        <h1>7セグメントディスプレイ | seven-segment display</h1>
+        <hr>
+        <table>
+            <tr>
+                <td>
+                    <div id="ssda">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <td class="nums ssd">
+                    <div id="ssd0"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd1"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd2"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd3"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd4"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="nums ssd">
+                    <div id="ssd5"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd6"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd7"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd8"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssd9"></div>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <td class="nums">
+                    <select id="from" class="diff">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+                <td class="nums">
+                    <div class="diff">⇒</div>
+                </td>
+                <td class="nums">
+                    <select id="to" class="diff">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="nums">
+                    <div id="ssdfrom2"></div>
+                </td>
+                <td class="nums">
+                    <div id="ssddiff2"></div>
+                </td>
+                <td class="nums">
+                    <div id="ssdto2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="nums ssd">
+                    <div id="ssdfrom"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssddiff"></div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssdto"></div>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tr>
+                <td colspan="2" class="nums"><button id="btn">START</button></td>
+            </tr>
+            <tr>
+                <td class="nums">
+                    <div>全箇所設定</div>
+                </td>
+                <td class="nums">
+                    <div>差分設定</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="nums ssd">
+                    <div id="ssdall"></div>
+                    <div id="ssdall-msg" class="msg">&nbsp;</div>
+                </td>
+                <td class="nums ssd">
+                    <div id="ssddif"></div>
+                    <div id="ssddif-msg" class="msg">&nbsp;</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>
