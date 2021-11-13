@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16pt;
+    font-family: monospace;
+}
+
+#page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+textarea {
+    width: 98%;
+    height: 5em;
+    padding: 1%;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.btn {
+    width: 50%;
+}
+
+button {
+    user-select: none;
+    cursor: pointer;
+}
+
+div.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+div.select {
+    margin: 10px 0;
+}
+
+.ta {
+    position: relative;
+}
+
+.cls {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 100;
+    user-select: none;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    font-size: 0.6em;
+    font-weight: bold;
+}
