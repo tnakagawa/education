@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シーザー暗号 | Caesar cipher</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div id="page">
+        <div class="title">シーザー暗号</div>
+        <div class="select"><span>n&nbsp;:&nbsp;</span><select id="n"></select></div>
+        <table>
+            <tr>
+                <td colspan="2" class="ta">
+                    <textarea id="m"></textarea>
+                    <span id="clsm" class="cls">Clear</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="btn"><button id="enc"> ↓ Encode ↓ </button></td>
+                <td class="btn"><button id="dec"> ↑ Decode ↑ </button></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="ta">
+                    <textarea id="c"></textarea>
+                    <span id="clsc" class="cls">Clear</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
