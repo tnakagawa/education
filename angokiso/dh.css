@@ -1,0 +1,38 @@
+* {
+    font-size: 16pt;
+    margin: 0;
+    padding: 0;
+}
+
+#page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+td {
+    height: 1.5em;
+    padding: 10px;
+}
+
+input {
+    width: 100px;
+    padding: 5px 0px;
+    text-align: right;
+}
+
+select {
+    width: 100px;
+    padding: 5px 0px;
+    text-align: right;
+}
+
+#gen {
+    padding: 0 15px;
+    cursor: pointer;
+}
