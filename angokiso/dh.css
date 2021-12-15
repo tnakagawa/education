@@ -10,14 +10,27 @@
 }
 
 .title {
-    margin: 10px 0;
+    margin: 10px 5px;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+table {
+    width: 100%;
+}
+
+td:nth-child(1) {
+    width: 10%;
 }
 
 td {
     height: 1.5em;
     padding: 10px;
+    white-space: nowrap;
+}
+
+tr:nth-child(2n) {
+    background-color: #eeeeee;
 }
 
 input {
@@ -35,4 +48,8 @@ select {
 #gen {
     padding: 0 15px;
     cursor: pointer;
+}
+
+a {
+    font-size: 0.8rem;
 }
