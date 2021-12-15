@@ -40,8 +40,6 @@ function setA() {
     let a = BigInt(document.getElementById('a').value);
     let ga = document.getElementById('ga');
     ga.innerText = '';
-    console.log(p);
-    console.log(a);
     if (a) {
         ga.innerText = (g ** a) % p;
     }
