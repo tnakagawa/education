@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Elgamal暗号</title>
+</head>
+
+<body>
+    <div id="page">
+        <hr>
+        <div class="title">Elgamal暗号 </div>
+        <hr>
+        <div>素数 p : <span id="p"></span></div>
+        <div>生成元 g : <span id="g"></span></div>
+        <hr>
+        <button id="gen">鍵生成</button>
+        <div>秘密鍵 x : <span id="x"></span></div>
+        <div>公開鍵 h : <span id="h"></span></div>
+        <hr>
+        <div>メッセージ：<input id="msg" type="text"><span id="msgerr"></span></div>
+        <div>Hex：<span id="thex"></span></div>
+        <button id="enc">エンコード（暗号）</button>
+        <div>乱数 r：<span id="r"></span></div>
+        <div>暗号情報 (c<sub>1</sub>,c<sub>2</sub>)：<span id="encdata"></span></div>
+        <hr>
+        <button id="dec">デコード（復号）</button>
+        <div>復号文：<span id="decdata"></span></div>
+        <div>Hex：<span id="dhex"></span></div>
+        <hr>
+        <a href="https://ja.wikipedia.org/wiki/ElGamal%E6%9A%97%E5%8F%B7">ElGamal暗号 - Wikipedia</a>
+    </div>
+</body>
+
+</html>

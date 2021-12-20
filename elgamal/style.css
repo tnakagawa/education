@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 12pt;
+    font-family: monospace, serif;
+}
+
+hr {
+    margin: 10px 0;
+}
+
+div {
+    line-height: 1.2em;
+    margin: 5px 0;
+}
+
+button {
+    margin: 5px 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+input {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+#msgerr {
+    color: red;
+}
+
+sub {
+    font-size: 0.5rem;
+}
