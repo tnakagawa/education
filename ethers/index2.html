@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethers Demo 2</title>
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            opacity: 0.8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            user-select: none;
+        }
+
+        .load-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 10px solid rgba(255, 255, 255, 0.5);
+            border-top-color: rgba(255, 255, 255, 1);
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+
+        body>.container {
+            padding: 60px 15px 0;
+        }
+
+        .container .text-muted {
+            margin: 20px 0;
+        }
+
+        .footer>.container {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.11/dist/vue.global.min.js"></script>
+    <script src="./script2.js" type="module"></script>
+</head>
+
+<body>
+    <main id="main">
+        <div class="container">
+            <div class="row">
+                <div class="h1">Ethers Demo 2</div>
+            </div>
+            <hr>
+            <div class="row mt-3">
+                <div class="h4 col-6">Entropy</div>
+                <div class="btn btn-primary m-3 col-3" @click="generateEntropy">Generate Entropy</div>
+            </div>
+            <div class="row">
+                <input class="form-control mx-3 font-monospace" type="text" v-model="entropy">
+            </div>
+            <div class="row mt-3">
+                <div class="h4 col-6">Checksum</div>
+                <div class="btn btn-primary m-3 col-3" @click="generateMnemonic">Generate Mnemonic</div>
+            </div>
+            <div class="row">
+                <input class="form-control mx-3 font-monospace" type="text" v-model="checksum">
+            </div>
+            <div class="row mt-3">
+                <div class="h4 col-6">Mnemonic</div>
+                <div class="btn btn-primary m-3 col-3" @click="checkMnemonic">Check Mnemonic</div>
+            </div>
+            <div class="row">
+                <input class="form-control mx-3 font-monospace" type="text" v-model="mnemonic" @change="clearAddrs">
+            </div>
+            <div class="row mt-3">
+                <div class="h4 col-6">Derived Addresses</div>
+                <div class="btn btn-primary m-3 col-3" @click="computeAddrs">Addresses</div>
+            </div>
+            <div class="row" v-for="(addr, index) in addrs">
+                <div class="col-3 font-monospace" v-text="'m/44\'/60\'/0\'/0/'+index"></div>
+                <div class="col-6 font-monospace" v-text="addr"></div>
+            </div>
+        </div>
+        <!-- Toast -->
+        <div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11">
+            <div id="toast" class="toast align-items-center bg-primary-subtle border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body" v-text="toast.message"> </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div id="modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content bg-danger-subtle">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel" v-text="modal.title"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body overflow-auto" v-text="modal.message" style="white-space: pre-line;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Loading -->
+        <div class="loading" v-show="loading">
+            <div class="load-circle"></div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                <a href="https://iancoleman.io/bip39/" target="_blank">BIP39 - Mnemonic Code</a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
